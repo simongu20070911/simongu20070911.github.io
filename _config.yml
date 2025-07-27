@@ -19,6 +19,9 @@ plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
 
+# Show future posts
+future: true
+
 # Permalink structure
 permalink: /:year/:month/:day/:title/
 
