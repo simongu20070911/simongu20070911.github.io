@@ -21,7 +21,7 @@ ULTRATHINK is my proposal for a radically new kind of organization—a self-gove
 - Operate as a transparent, blockchain-based global utility
 - Free humanity from involuntary labor to pursue meaning, creativity, and connection
 
-Read the full [ULTRATHINK Manifesto](/2025/01/27/ultrathink-protocol-manifesto.html) to understand the complete vision.
+Read the full [ULTRATHINK Manifesto](/2025/07/27/ultrathink-protocol-manifesto.html) to understand the complete vision.
 
 ## What You'll Find Here
 

@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "The Missing Piece in Robotics: Real-Time Reflex Control Through Latent Space Prediction"
-date:   2025-01-27 16:00:00 +0000
+date:   2025-07-27 16:00:00 +0000
 categories: robotics ai vision
 ---
 
