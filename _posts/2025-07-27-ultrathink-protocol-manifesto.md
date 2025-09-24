@@ -3,6 +3,8 @@ layout: post
 title:  "The ULTRATHINK Protocol: A Manifesto for a Post-Scarcity, Artificially Governed World"
 date:   2025-07-27 14:00:00 +0000
 categories: ultrathink manifesto community
+redirect_from:
+  - /2025/07/27/ultrathink-protocol-manifesto.html
 ---
 
 ## Foreword: A Moment of Choice

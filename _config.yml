@@ -18,7 +18,7 @@ plugins:
   - jekyll-feed
   - jekyll-seo-tag
   - jekyll-sitemap
-
+  - jekyll-redirect-from
 # Show future posts
 future: true
 
