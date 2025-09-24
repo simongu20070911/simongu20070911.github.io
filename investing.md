@@ -19,6 +19,12 @@ Sam Altman’s 1 GW-per-week build implies 52 million accelerators annually, **$
 
 ![Stack economics]({{ "/assets/abundant-intelligence/market_cap_projection.png" | relative_url }})
 
+**NVIDIA vs. AMD: Seven Powers, One Market Supercycle**  
+A structured moat comparison using the seven powers lens plus Altman-scale valuation math showing why AMD can 10× on 30% accelerator share while NVIDIA needs tougher assumptions to 4–5×.
+
+- [Read the analysis →]({% post_url 2025-09-24-nvda-vs-amd-moat-analysis %})
+- [Review the share/margin sensitivities]({% post_url 2025-09-24-nvda-vs-amd-moat-analysis %}#quick-sensitivity-dial)
+
 ## Latest Investing Notes
 
 {% assign investing_posts = site.categories.investing | sort: "date" | reverse %}
