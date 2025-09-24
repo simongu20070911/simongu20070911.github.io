@@ -10,7 +10,7 @@ redirect_from:
 
 ## Why this scenario matters
 
-Sam Altman floated a factory network that can drop a gigawatt of AI compute every week. Scale that to a full year and you are staring at **52 GW of fresh capacity**—roughly **52 million 700 W accelerators** and a stack that has to be financed, powered, cooled, and monetised. I rebuilt my market-cap engine around that premise to see who captures the economics and who ends up holding the bill. (Original essay: [“Abundant Intelligence” by Sam Altman](https://moores.samaltman.com/abundant-intelligence).)
+Sam Altman floated a factory network that can drop a gigawatt of AI compute every week. Scale that to a full year and you are staring at **52 GW of fresh capacity**—roughly **52 million 700 W accelerators** and a stack that has to be financed, powered, cooled, and monetised. I rebuilt my market-cap engine around that premise to see who captures the economics and who ends up holding the bill. (Original essay: [“Abundant Intelligence” by Sam Altman](https://blog.samaltman.com/abundant-intelligence).)
 
 The headline: a fully funded “abundant intelligence” build-out pushes **$1.63 trillion of capex** into the ecosystem annually and spins off **$1.3 trillion of AI service revenue**. The winners are not just the obvious GPU vendors; hyperscalers, memory suppliers, and energy producers all get a rerating, while balance-sheet stress shifts to whichever platforms choose to own the infrastructure.
 
