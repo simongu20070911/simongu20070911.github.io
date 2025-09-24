@@ -46,7 +46,9 @@ NVIDIA’s moat is still expanding where it controls the stack (CUDA, system des
 
 ## Scenario math: Altman-scale build-out
 
-Sam Altman’s “1 GW per week” factory line implies **52 GW/year**. At ~$50 B per GW (≈$35 B hardware + $15 B facilities), the AI stack would absorb **$2.6 T/year** of capex, with ~60% ($1.56 T) flowing to accelerators (GPUs + HBM + boards).
+Sam Altman’s “1 GW per week” factory line implies **52 GW/year**. At ~$50 B per GW (≈$35 B hardware + $15 B facilities), the AI stack would absorb **$2.6 T/year** of capex, with ~60% ($1.56 T) flowing to accelerators (GPUs + HBM + boards). This is the same base case I expand on in [Abundant Intelligence: Who Wins a 52 GW per Year AI Build-Out]({% post_url 2025-09-24-abundant-intelligence-market-cap-scenario %}).
+
+![Scenario uplift for NVIDIA and AMD]({{ "/assets/abundant-intelligence/nvda_vs_amd_market_caps.png" | relative_url }})
 
 ### AMD 10× path (share-led upside)
 
@@ -71,6 +73,8 @@ To reach 4–5× (~$18–22.5 T), NVIDIA needs some combination of:
 2. **Higher $/GW:** $70–90 B/GW pricing (well above the $50 B/GW yardstick Jensen Huang references).  
 3. **Re-rating:** Sustained P/E >40× on trillion-dollar earnings despite regulatory overhang.
 
+![Market cap sensitivity to accelerator share]({{ "/assets/abundant-intelligence/nvda_vs_amd_share_sensitivity.png" | relative_url }})
+
 ---
 
 ## Industrial realities shaping the upside
@@ -94,9 +98,12 @@ To reach 4–5× (~$18–22.5 T), NVIDIA needs some combination of:
 
 ## Quick sensitivity dial
 
+- **Relative uplift:** In the Abundant Intelligence base case, AMD’s market cap expands ~9× versus ~2.8× for NVIDIA.  
 - Every **5 ppt share shift** ≈ ±$78 B revenue → ±$430 B cap (AMD) / ±$1.1–1.2 T (NVIDIA).  
 - **$/GW** scales valuations linearly: if costs settle at $30 B/GW, take 60% of the figures above; if Blackwell-class systems trend to $60 B/GW, multiply by 1.2×.  
 - **Software attach**: letting NVIDIA capture $50–100 B recurring software (10× EV multiple) adds $0.5–1 T upside independent of hardware share.
+
+![Relative market cap uplift versus baseline]({{ "/assets/abundant-intelligence/nvda_vs_amd_relative_uplift.png" | relative_url }})
 
 ---
 

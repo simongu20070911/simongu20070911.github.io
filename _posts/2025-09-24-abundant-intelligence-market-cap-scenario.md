@@ -10,7 +10,7 @@ redirect_from:
 
 ## Why this scenario matters
 
-Sam Altman floated a factory network that can drop a gigawatt of AI compute every week. Scale that to a full year and you are staring at **52 GW of fresh capacity**—roughly **52 million 700 W accelerators** and a stack that has to be financed, powered, cooled, and monetised. I rebuilt my market-cap engine around that premise to see who captures the economics and who ends up holding the bill.
+Sam Altman floated a factory network that can drop a gigawatt of AI compute every week. Scale that to a full year and you are staring at **52 GW of fresh capacity**—roughly **52 million 700 W accelerators** and a stack that has to be financed, powered, cooled, and monetised. I rebuilt my market-cap engine around that premise to see who captures the economics and who ends up holding the bill. (Original essay: [“Abundant Intelligence” by Sam Altman](https://moores.samaltman.com/abundant-intelligence).)
 
 The headline: a fully funded “abundant intelligence” build-out pushes **$1.63 trillion of capex** into the ecosystem annually and spins off **$1.3 trillion of AI service revenue**. The winners are not just the obvious GPU vendors; hyperscalers, memory suppliers, and energy producers all get a rerating, while balance-sheet stress shifts to whichever platforms choose to own the infrastructure.
 
@@ -48,6 +48,10 @@ Three themes jump off the page:
 1. **Capital-light beneficiaries dominate the upside.** NVIDIA, AMD, and the memory players collect outsized incremental net income without writing the cheques for plants or data centres.
 2. **Hyperscalers must decide how much balance sheet to deploy.** Microsoft’s share of stack capex alone is modelled at $326 B/year. Apple, Alphabet, Amazon, and Meta each absorb $160–245 B.
 3. **Tesla’s upside is real—but levered to optionality.** Robotics, FSD subscriptions, and storage attach rates drive the rerating. Under a downside mix (12 M subs at $80, 20% storage attach, 25% robotics margin) the valuation compresses to $2.2 T.
+
+![NVDA vs AMD uplift under the scenario]({{ "/assets/abundant-intelligence/nvda_vs_amd_market_caps.png" | relative_url }})
+
+The relative uplift is lopsided: AMD’s cap jumps ~9× versus ~2.8× for NVIDIA. The mechanics—multi-sourced accelerator share, easing supply bottlenecks, and buyer-imposed diversification—are unpacked in [NVIDIA vs. AMD: Seven Powers, One Market Supercycle]({% post_url 2025-09-24-nvda-vs-amd-moat-analysis %}). That follow-on piece also includes sensitivity curves and a full moat comparison.
 
 ![Incremental earnings ramp]({{ "/assets/abundant-intelligence/incremental_net_income_ramp.png" | relative_url }})
 
