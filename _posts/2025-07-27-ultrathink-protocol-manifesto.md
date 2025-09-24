@@ -92,7 +92,7 @@ If any of this resonates, you are already part of the movement.
 
 ## Technical Appendix
 
-Readers who want to dive into proofs, governance primitives, and risk models can explore the [Technical Analysis]({{ "/2025/07/27/ultrathink-technical-analysis.html" | relative_url }}). It details the mathematics behind the treasury system, the guardrails that keep agents accountable, and the simulations we use to validate new capabilities.
+Readers who want to dive into proofs, governance primitives, and risk models can explore the [Technical Analysis]({% post_url 2025-07-27-ultrathink-technical-analysis %}). It details the mathematics behind the treasury system, the guardrails that keep agents accountable, and the simulations we use to validate new capabilities.
 
 ## Closing: Designing the Successor We Want
 

@@ -219,4 +219,4 @@ This analysis demonstrates that ULTRATHINK is not speculative fiction, but a mat
 
 ---
 
-*For the visionary overview of this system, see the [ULTRATHINK Protocol Manifesto]({{ "/2025/07/27/ultrathink-protocol-manifesto.html" | relative_url }}). This technical analysis provides the mathematical and economic foundations underlying that vision.*
+*For the visionary overview of this system, see the [ULTRATHINK Protocol Manifesto]({% post_url 2025-07-27-ultrathink-protocol-manifesto %}). This technical analysis provides the mathematical and economic foundations underlying that vision.*
