@@ -1,0 +1,158 @@
+Abundant Intelligence Market-Cap Scenario
+========================================
+
+Target accelerators per year: 52,000,000
+Total GPU revenue (USD): 0.582 Trillion
+HBM revenue pool (USD): 0.287 Trillion
+Energy demand: 52 GW nameplate annually; 410.0 TWh consumption
+Service revenue pool: 1.305 Trillion
+Stack capex requirement: 1.631 Trillion
+
+Company Summary (values in billions unless noted):
+MSFT
+  Baseline market cap: 3.823 TUSD
+  Baseline net income: 88.0 BUSD
+  Incremental net income @ steady state: 91.3 BUSD
+  Scenario valuation (rerated): 6.456 TUSD
+  Discounted PV of incremental NI (2025 base): 983.4 BUSD
+  Annual capex burden (share of stack capex): 326.1 BUSD
+  Incremental NI / Capex ratio: 0.3
+
+NVDA
+  Baseline market cap: 4.470 TUSD
+  Baseline net income: 44.0 BUSD
+  Incremental net income @ steady state: 154.1 BUSD
+  Scenario valuation (rerated): 6.340 TUSD
+  Discounted PV of incremental NI (2025 base): 1659.8 BUSD
+  Annual capex burden (share of stack capex): 0.0 BUSD
+  Incremental NI / Capex ratio: n/a
+
+AAPL
+  Baseline market cap: 3.775 TUSD
+  Baseline net income: 97.0 BUSD
+  Incremental net income @ steady state: 62.6 BUSD
+  Scenario valuation (rerated): 5.427 TUSD
+  Discounted PV of incremental NI (2025 base): 674.3 BUSD
+  Annual capex burden (share of stack capex): 244.6 BUSD
+  Incremental NI / Capex ratio: 0.3
+
+GOOGL
+  Baseline market cap: 2.200 TUSD
+  Baseline net income: 80.0 BUSD
+  Incremental net income @ steady state: 58.7 BUSD
+  Scenario valuation (rerated): 4.439 TUSD
+  Discounted PV of incremental NI (2025 base): 632.2 BUSD
+  Annual capex burden (share of stack capex): 244.6 BUSD
+  Incremental NI / Capex ratio: 0.2
+
+AMZN
+  Baseline market cap: 2.353 TUSD
+  Baseline net income: 55.0 BUSD
+  Incremental net income @ steady state: 50.1 BUSD
+  Scenario valuation (rerated): 3.994 TUSD
+  Discounted PV of incremental NI (2025 base): 539.5 BUSD
+  Annual capex burden (share of stack capex): 195.7 BUSD
+  Incremental NI / Capex ratio: 0.3
+
+TSLA
+  Baseline market cap: 1.416 TUSD
+  Baseline net income: 15.0 BUSD
+  Incremental net income @ steady state: 34.2 BUSD
+  Scenario valuation (rerated): 3.201 TUSD
+  Discounted PV of incremental NI (2025 base): 368.8 BUSD
+  Annual capex burden (share of stack capex): 0.0 BUSD
+  Incremental NI / Capex ratio: n/a
+
+META
+  Baseline market cap: 1.897 TUSD
+  Baseline net income: 47.0 BUSD
+  Incremental net income @ steady state: 45.7 BUSD
+  Scenario valuation (rerated): 2.687 TUSD
+  Discounted PV of incremental NI (2025 base): 491.7 BUSD
+  Annual capex burden (share of stack capex): 163.1 BUSD
+  Incremental NI / Capex ratio: 0.3
+
+AMD
+  Baseline market cap: 0.261 TUSD
+  Baseline net income: 2.6 BUSD
+  Incremental net income @ steady state: 36.4 BUSD
+  Scenario valuation (rerated): 1.326 TUSD
+  Discounted PV of incremental NI (2025 base): 392.0 BUSD
+  Annual capex burden (share of stack capex): 0.0 BUSD
+  Incremental NI / Capex ratio: n/a
+
+SKH
+  Baseline market cap: 0.178 TUSD
+  Baseline net income: 8.0 BUSD
+  Incremental net income @ steady state: 37.9 BUSD
+  Scenario valuation (rerated): 1.101 TUSD
+  Discounted PV of incremental NI (2025 base): 408.0 BUSD
+  Annual capex burden (share of stack capex): 0.0 BUSD
+  Incremental NI / Capex ratio: n/a
+
+ORCL
+  Baseline market cap: 0.932 TUSD
+  Baseline net income: 15.0 BUSD
+  Incremental net income @ steady state: 19.6 BUSD
+  Scenario valuation (rerated): 0.899 TUSD
+  Discounted PV of incremental NI (2025 base): 210.7 BUSD
+  Annual capex burden (share of stack capex): 81.5 BUSD
+  Incremental NI / Capex ratio: 0.2
+
+MU
+  Baseline market cap: 0.186 TUSD
+  Baseline net income: 6.0 BUSD
+  Incremental net income @ steady state: 17.2 BUSD
+  Scenario valuation (rerated): 0.697 TUSD
+  Discounted PV of incremental NI (2025 base): 185.5 BUSD
+  Annual capex burden (share of stack capex): 0.0 BUSD
+  Incremental NI / Capex ratio: n/a
+
+ASML
+  Baseline market cap: 0.379 TUSD
+  Baseline net income: 7.8 BUSD
+  Incremental net income @ steady state: 4.2 BUSD
+  Scenario valuation (rerated): 0.443 TUSD
+  Discounted PV of incremental NI (2025 base): 44.8 BUSD
+  Annual capex burden (share of stack capex): 0.0 BUSD
+  Incremental NI / Capex ratio: n/a
+
+NEE
+  Baseline market cap: 0.149 TUSD
+  Baseline net income: 7.3 BUSD
+  Incremental net income @ steady state: 1.9 BUSD
+  Scenario valuation (rerated): 0.203 TUSD
+  Discounted PV of incremental NI (2025 base): 20.7 BUSD
+  Annual capex burden (share of stack capex): 0.0 BUSD
+  Incremental NI / Capex ratio: n/a
+
+CEG
+  Baseline market cap: 0.105 TUSD
+  Baseline net income: 4.0 BUSD
+  Incremental net income @ steady state: 1.8 BUSD
+  Scenario valuation (rerated): 0.138 TUSD
+  Discounted PV of incremental NI (2025 base): 18.9 BUSD
+  Annual capex burden (share of stack capex): 0.0 BUSD
+  Incremental NI / Capex ratio: n/a
+
+NVDA Sensitivity: Valuation (TUSD) by ASP multiplier and share
+      0.8  0.9  1.0  1.1  1.2
+0.55 4.75 5.16 5.58 6.00 6.42
+0.60 5.05 5.51 5.96 6.42 6.87
+0.65 5.35 5.85 6.34 6.83 7.33
+0.70 5.66 6.19 6.72 7.25 7.78
+0.75 5.96 6.53 7.10 7.67 8.24
+
+NVDA Sensitivity: Valuation (TUSD) by margin multiplier and share
+      0.8  0.9  1.0  1.1  1.2
+0.55 4.75 5.16 5.58 6.00 6.42
+0.60 5.05 5.51 5.96 6.42 6.87
+0.65 5.35 5.85 6.34 6.83 7.33
+0.70 5.66 6.19 6.72 7.25 7.78
+0.75 5.96 6.53 7.10 7.67 8.24
+
+Notes:
+- Service revenues allocated: Apple 15%, Microsoft 20%, Alphabet 15%, Amazon 12%, Meta 10%, Oracle 5%, Tesla robotics 3%; balance left to other ecosystems.
+- Capex burden approximates proportional ownership of total stack capex (2.8× GPU spend).
+- Tesla downside: 12M FSD subs at $80/mo, 20% storage attach at $220/kWh, robotics margin 25%.
+- PV math: nine-year ramp, 10% discount rate, 3% terminal growth.
