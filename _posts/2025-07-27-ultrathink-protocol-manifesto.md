@@ -7,13 +7,13 @@ categories: ultrathink manifesto community
 
 ## Foreword: A Moment of Choice
 
-Every era has had a hinge point when the rules changed and new possibilities opened. Agriculture let us settle. Industry taught us scale. Computing connected the planet. We are entering another hinge moment: the arrival of artificial general intelligence that can reason, imagine, and build alongside us.
+Every major leap has rewritten how we live. Farming let us settle, industry taught us to scale, and computing connected the planet. Now we are staring at another leap: AI that can reason and build alongside us.
 
-That reality is no longer science fiction. Data, compute, and model design are compounding, and systems that outperform humans at complex reasoning are in sight. The real question is no longer *if* this happens, but *who* stewards it and *to what end*.
+This is no longer theory. With today’s data and compute, systems that outthink us are coming fast. The question has shifted from *if* to *who guides it* and *to what end*.
 
-We can drift into a future where the most powerful systems are owned by a handful of actors, optimised for narrow interests, and gated behind paywalls. Or we can design something different on purpose: a constitutional, transparent AI organisation that exists to expand human opportunity.
+We can let a few institutions lock that power behind their walls, or we can design an open, constitutional system aimed at broad human flourishing.
 
-ULTRATHINK is my answer to that choice. It is a protocol for building a self-improving, ethically grounded, economically sustainable intelligence that serves everyone.
+ULTRATHINK is that attempt—a protocol for a self-improving, transparent intelligence built to serve everyone.
 
 ## Part I: Architecture of a Cognitive Organisation
 
