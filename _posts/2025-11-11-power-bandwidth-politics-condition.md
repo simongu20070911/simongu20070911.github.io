@@ -82,6 +82,9 @@ Further recent reporting: Reuters on the U.S. Energy Information Administration�
 - Policy timeline: `/assets/data/policy_timeline.csv`
 - Power‑purchase agreements (PPAs): `/assets/data/power_deals.csv`
 
+[Workbook]
+- Excel workbook with all tables and charts: `/assets/sheets/power-bandwidth-politics.xlsx`
+
 [1]: https://epoch.ai/blog/training-compute-of-frontier-ai-models-grows-by-4-5x-per-year "Epoch AI — Training compute of frontier AI models grows by 4–5× per year"
 
 [2]: https://pubmed.ncbi.nlm.nih.gov/22398556/ "Experimental verification of Landauer's principle"
