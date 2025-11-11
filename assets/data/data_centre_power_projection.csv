@@ -1,0 +1,6 @@
+region,year,twh,scenario,metric,notes,source,source_url
+Global,2024,415,Base Case,consumption_twh,IEA estimate of current level,IEA Energy & AI (2025),https://www.iea.org/reports/energy-and-ai/energy-demand-from-ai
+Global,2030,945,Base Case,consumption_twh,Projected doubling by 2030 (~15% CAGR 2024–2030),IEA Energy & AI (2025),https://www.iea.org/reports/energy-and-ai/energy-demand-from-ai
+United States,2030,240,Base Case,delta_twh_vs_2024,Increase vs 2024 level,IEA Energy & AI (2025),https://www.iea.org/reports/energy-and-ai/energy-demand-from-ai
+China,2030,175,Base Case,delta_twh_vs_2024,Increase vs 2024 level,IEA Energy & AI (2025),https://www.iea.org/reports/energy-and-ai/energy-demand-from-ai
+Europe,2030,45,Base Case,delta_twh_vs_2024,Increase vs 2024 level (>70% growth),IEA Energy & AI (2025),https://www.iea.org/reports/energy-and-ai/energy-demand-from-ai

@@ -1,0 +1,3 @@
+period_start,period_end,context,doubling_time_years,slope_m,metric,source,source_url
+2008,2023,HPC energy efficiency overall (Koomey revisited),2.29,0.3026,max efficiency (FLOPS/W) doubling time,"Prieto et al., Cluster Computing (2024/2025)",https://link.springer.com/article/10.1007/s10586-024-04767-y
+2008,2023,Green500 top system energy efficiency,2.22,0.3122,top efficiency (GFLOPS/W) doubling time,"Prieto et al., Cluster Computing (2024/2025)",https://link.springer.com/article/10.1007/s10586-024-04767-y

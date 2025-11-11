@@ -1,0 +1,4 @@
+company,technology,period,value,unit,note,source,source_url
+TSMC,CoWoS,2024,35000-40000,wafers_per_month,Estimated 35–40k wpm in 2024,TrendForce (2024-10-21),https://www.trendforce.com/news/2024/10/21/news-cowos-capacity-doubles-for-two-years-still-insufficient-positive-outlook-for-suppliers/
+TSMC,CoWoS,2025,75000,wafers_per_month,Projected monthly capacity in 2025; near doubling vs 2024,TrendForce (2025-01-02),https://www.trendforce.com/news/2025/01/02/news-tsmc-set-to-expand-cowos-capacity-to-record-75000-wafers-in-2025-doubling-2024-output/
+TSMC,CoWoS,2026,90000-150000,wafers_per_month,Projected range by end-2026 depending on expansions,TrendForce (2024-10-21),https://www.trendforce.com/news/2024/10/21/news-cowos-capacity-doubles-for-two-years-still-insufficient-positive-outlook-for-suppliers/

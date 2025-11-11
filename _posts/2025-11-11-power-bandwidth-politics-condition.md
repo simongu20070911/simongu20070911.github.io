@@ -71,6 +71,17 @@ If you prefer your conclusions blunt: demand will not run out first; physics wil
 
 Further recent reporting: Reuters on the U.S. Energy Information Administration’s record‑use outlook linked to data‑centre demand (2025‑06‑10); the Wall Street Journal on the IEA’s AI‑driven surge in data‑centre electricity; The Verge on an AMD–Department of Energy AI supercomputer partnership; The Guardian and Politico on the Three Mile Island restart arrangements with Microsoft; Reuters on U.S. congressional proposals around AI chips and on prospective EU semiconductor support; and The Guardian on water constraints around data‑centre growth in Latin America.
 
+[Datasets]
+- Demand & frontier runs: `/assets/data/demand_compute.csv`
+- Energy‑efficiency trend: `/assets/data/efficiency_trend.csv`
+- Data‑centre electricity: `/assets/data/data_centre_power_projection.csv`
+- Packaging capacity: `/assets/data/packaging_capacity.csv`
+- HBM market status: `/assets/data/hbm_market_status.csv`
+- Interconnection queue overview: `/assets/data/interconnection_queue_summary.csv`
+- Interconnection cadence: `/assets/data/interconnection_cadence.csv`
+- Policy timeline: `/assets/data/policy_timeline.csv`
+- Power‑purchase agreements (PPAs): `/assets/data/power_deals.csv`
+
 [1]: https://epoch.ai/blog/training-compute-of-frontier-ai-models-grows-by-4-5x-per-year "Epoch AI — Training compute of frontier AI models grows by 4–5× per year"
 
 [2]: https://pubmed.ncbi.nlm.nih.gov/22398556/ "Experimental verification of Landauer's principle"
