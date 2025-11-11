@@ -1,0 +1,4 @@
+year,model,training_flops_est,training_flops_scientific,notes,source,source_url
+2020,GPT-3 175B (davinci),3e23,3.0E23,Epoch estimate; reference point for frontier trend,"Epoch AI (Sevilla & Roldán, 2024)",https://epoch.ai/blog/training-compute-of-frontier-ai-models-grows-by-4-5x-per-year
+2023,GPT-4,2e25,2.0E25,Epoch estimate,"Epoch AI (Sevilla & Roldán, 2024)",https://epoch.ai/blog/training-compute-of-frontier-ai-models-grows-by-4-5x-per-year
+2023,Gemini Ultra,5e25,5.0E25,Epoch estimate,"Epoch AI (Sevilla & Roldán, 2024)",https://epoch.ai/blog/training-compute-of-frontier-ai-models-grows-by-4-5x-per-year

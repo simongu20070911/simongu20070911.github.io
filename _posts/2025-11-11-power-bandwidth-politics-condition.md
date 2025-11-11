@@ -71,6 +71,145 @@ If you prefer your conclusions blunt: demand will not run out first; physics wil
 
 Further recent reporting: Reuters on the U.S. Energy Information Administration’s record‑use outlook linked to data‑centre demand (2025‑06‑10); the Wall Street Journal on the IEA’s AI‑driven surge in data‑centre electricity; The Verge on an AMD–Department of Energy AI supercomputer partnership; The Guardian and Politico on the Three Mile Island restart arrangements with Microsoft; Reuters on U.S. congressional proposals around AI chips and on prospective EU semiconductor support; and The Guardian on water constraints around data‑centre growth in Latin America.
 
+## Data snapshots (inline)
+
+Frontier training compute (selected runs)
+
+<table>
+  <thead>
+    <tr>
+      <th>Year</th>
+      <th>Model</th>
+      <th>Training FLOPs (sci.)</th>
+      <th>Source</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% assign rows = site.data.pbp.demand_compute | sort: "year" %}
+  {% for r in rows %}
+    <tr>
+      <td>{{ r.year }}</td>
+      <td>{{ r.model }}</td>
+      <td>{{ r.training_flops_scientific }}</td>
+      <td><a href="{{ r.source_url }}">{{ r.source }}</a></td>
+    </tr>
+  {% endfor %}
+  </tbody>
+  <caption>Estimates compiled from Epoch AI; see dataset links below.</caption>
+  </table>
+
+Global data‑centre electricity (TWh)
+
+<table>
+  <thead>
+    <tr>
+      <th>Region</th>
+      <th>Year</th>
+      <th>TWh</th>
+      <th>Scenario</th>
+      <th>Source</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for r in site.data.pbp.data_centre_power_projection %}
+    {% if r.region == 'Global' and r.metric == 'consumption_twh' %}
+    <tr>
+      <td>{{ r.region }}</td>
+      <td>{{ r.year }}</td>
+      <td>{{ r.twh }}</td>
+      <td>{{ r.scenario }}</td>
+      <td><a href="{{ r.source_url }}">{{ r.source }}</a></td>
+    </tr>
+    {% endif %}
+  {% endfor %}
+  </tbody>
+  <caption>IEA Energy &amp; AI outlook (base case).</caption>
+  </table>
+
+Advanced packaging (CoWoS) capacity – TSMC
+
+<table>
+  <thead>
+    <tr>
+      <th>Period</th>
+      <th>Capacity</th>
+      <th>Unit</th>
+      <th>Note</th>
+      <th>Source</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for r in site.data.pbp.packaging_capacity %}
+    {% if r.company == 'TSMC' and r.technology == 'CoWoS' %}
+    <tr>
+      <td>{{ r.period }}</td>
+      <td>{{ r.value }}</td>
+      <td>{{ r.unit }}</td>
+      <td>{{ r.note }}</td>
+      <td><a href="{{ r.source_url }}">{{ r.source }}</a></td>
+    </tr>
+    {% endif %}
+  {% endfor %}
+  </tbody>
+  <caption>TrendForce estimates and projections.</caption>
+  </table>
+
+US interconnection queue snapshot (GW)
+
+<table>
+  <thead>
+    <tr>
+      <th>As of</th>
+      <th>Total (GW)</th>
+      <th>Generation (GW)</th>
+      <th>Storage (GW)</th>
+      <th>Source</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for r in site.data.pbp.interconnection_queue_summary %}
+    <tr>
+      <td>{{ r.as_of }}</td>
+      <td>{{ r.total_capacity_gw }}</td>
+      <td>{{ r.generation_gw }}</td>
+      <td>{{ r.storage_gw }}</td>
+      <td><a href="{{ r.source_url }}">{{ r.source }}</a></td>
+    </tr>
+  {% endfor %}
+  </tbody>
+  <caption>LBNL “Queued Up” report and queue updates.</caption>
+  </table>
+
+Nuclear PPAs (selected)
+
+<table>
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Buyer</th>
+      <th>Plant</th>
+      <th>Capacity (MW)</th>
+      <th>Term (yrs)</th>
+      <th>Location</th>
+      <th>Source</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for r in site.data.pbp.power_deals %}
+    <tr>
+      <td>{{ r.date }}</td>
+      <td>{{ r.buyer }}</td>
+      <td>{{ r.plant_or_source }}</td>
+      <td>{{ r.capacity_mw }}</td>
+      <td>{{ r.term_years }}</td>
+      <td>{{ r.location }}</td>
+      <td><a href="{{ r.source_url }}">{{ r.source }}</a></td>
+    </tr>
+  {% endfor %}
+  </tbody>
+  <caption>Announced firm power deals relevant to compute siting.</caption>
+  </table>
+
 [Datasets]
 - Demand & frontier runs: `/assets/data/demand_compute.csv`
 - Energy‑efficiency trend: `/assets/data/efficiency_trend.csv`
