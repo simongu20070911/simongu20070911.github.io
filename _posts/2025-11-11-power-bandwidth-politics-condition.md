@@ -71,9 +71,15 @@ If you prefer your conclusions blunt: demand will not run out first; physics wil
 
 Further recent reporting: Reuters on the U.S. Energy Information Administration’s record‑use outlook linked to data‑centre demand (2025‑06‑10); the Wall Street Journal on the IEA’s AI‑driven surge in data‑centre electricity; The Verge on an AMD–Department of Energy AI supercomputer partnership; The Guardian and Politico on the Three Mile Island restart arrangements with Microsoft; Reuters on U.S. congressional proposals around AI chips and on prospective EU semiconductor support; and The Guardian on water constraints around data‑centre growth in Latin America.
 
+<link rel="stylesheet" href="/assets/css/pbp.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script defer src="/assets/js/pbp.js"></script>
+
 ## Data snapshots (inline)
 
 Frontier training compute (selected runs)
+
+<canvas id="pbpCompute" class="pbp-chart" height="120"></canvas>
 
 <table>
   <thead>
@@ -99,6 +105,8 @@ Frontier training compute (selected runs)
   </table>
 
 Global data‑centre electricity (TWh)
+
+<canvas id="pbpPower" class="pbp-chart" height="120"></canvas>
 
 <table>
   <thead>
@@ -127,6 +135,8 @@ Global data‑centre electricity (TWh)
   </table>
 
 Advanced packaging (CoWoS) capacity – TSMC
+
+<canvas id="pbpCoWoS" class="pbp-chart" height="120"></canvas>
 
 <table>
   <thead>
@@ -181,6 +191,8 @@ US interconnection queue snapshot (GW)
   </table>
 
 Nuclear PPAs (selected)
+
+<canvas id="pbpPPAs" class="pbp-chart" height="120"></canvas>
 
 <table>
   <thead>

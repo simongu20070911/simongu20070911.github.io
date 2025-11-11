@@ -1,0 +1,16 @@
+/* Power–Bandwidth–Politics: table + print styling */
+.post-content table { width: 100%; border-collapse: collapse; margin: 1.25rem 0; font-size: 0.95rem; }
+.post-content th, .post-content td { padding: 8px 10px; border-bottom: 1px solid #e5e7eb; vertical-align: top; }
+.post-content thead th { border-bottom: 2px solid #111827; text-align: left; }
+.post-content tbody tr:nth-child(odd) { background-color: #fafafa; }
+.post-content caption { caption-side: bottom; text-align: left; color: #6b7280; font-size: 0.85rem; margin-top: 0.25rem; }
+.post-content .pbp-chart { margin: 1rem 0 2rem; }
+.post-content .source-note { color: #6b7280; font-size: 0.85rem; margin-top: 0.25rem; }
+
+@media print {
+  .site-header, .site-nav, .site-footer, .page-navigation, .post-meta { display: none !important; }
+  .post-content thead { display: table-header-group; }
+  .post-content img, .post-content canvas, .post-content table { page-break-inside: avoid; }
+  a[href]:after { content: " (" attr(href) ")"; font-size: 0.85em; }
+}
+
