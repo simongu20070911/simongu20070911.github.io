@@ -4,6 +4,7 @@ title: "The Power–Bandwidth–Politics Condition: Why the Compute Race Is Cond
 date: 2025-11-11 10:00:00 +0000
 categories: compute policy systems
 excerpt: "A rigorous synthesis: demand looks unbounded when scaling works; supply is gated in the 2025–2035 window by power, bandwidth, and political economy."
+published: false
 ---
 
 The race for more computing is not literally unlimited; it is conditionally unbounded. On the demand side, revealed returns to additional compute at the frontier remain high, so actors behave as if demand were unbounded. On the supply side, growth over the next decade is paced by three chokepoints: power (electricity supply and heat rejection), bandwidth (memory throughput and advanced packaging), and political economy (capital intensity, supply chains, and export controls). By “more computing,” I mean effective compute for frontier workloads—floating‑point operations (FLOPs) actually delivered to training and serving state‑of‑the‑art artificial intelligence (AI) systems after algorithmic and systems efficiencies. By “almost unlimited,” I mean capable of many further doublings without meeting an intrinsic ceiling this decade. On these definitions, the claim holds only if the system clears the three chokepoints; otherwise growth bends into an S‑curve well before 2035. Empirically, demand has behaved as if unbounded; supply is the question [1].
