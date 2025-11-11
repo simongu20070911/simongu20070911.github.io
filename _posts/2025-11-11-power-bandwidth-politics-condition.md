@@ -4,7 +4,7 @@ title: "The Power–Bandwidth–Politics Condition: Why the Compute Race Is Cond
 date: 2025-11-11 10:00:00 +0000
 categories: compute policy systems
 excerpt: "A rigorous synthesis: demand looks unbounded when scaling works; supply is gated in the 2025–2035 window by power, bandwidth, and political economy."
-published: false
+published: true
 ---
 
 I came to the “compute race” the way many came to gold or equities—through numbers first and stories later. In 2025, the numbers have been unmissable. Training budgets that once sounded outlandish now look routine; clusters that once felt extravagant now feel undersized. It is tempting to declare the race for computing power “unlimited.” I think a more accurate description is “conditionally unbounded.” Demand behaves as if there is no ceiling; supply reminds us that there is a calendar and a queue.
