@@ -1,9 +1,9 @@
 ---
 layout: post
-title: The Very Much Programmable New Recurrent NeuroNet
+title: The Very Much Programmable New Recurrent Neural Net
 date: 2025-11-20 10:00:00 +0000
 categories: AI architectures and insights
-excerpt: What the new Recurrent Network is?
+excerpt: What the new Recurrent Neural Net is?
 published: true
 ---
 
