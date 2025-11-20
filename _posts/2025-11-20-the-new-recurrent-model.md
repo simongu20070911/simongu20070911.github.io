@@ -9,7 +9,9 @@ published: true
 
 
 When OpenAI released GPT5.1-codex-max today optimized for context compaction after exhausting its context window, it seems to me that the traditional recurrent network is being redefined: modern large language models are usually described as feedforward transformers that read a fixed window of text and then forget it, yet the moment we start letting a model rewrite its own history into a compact state and carry that state forward, we have quietly turned the system into a recurrent one. 
+
 This makes the architecture far more controllable than a classic recurrent network: LSTM, RNN is designed so that bias is injected into the architecture by designing controllers, gates, etc this creates more structure for the model's recurrence which strongly mitigate a class of the "gradient explosion" problem of traditional RNNs, but are brittle and rigid, dependent on the exact task. 
+
 this creates a lot of problems because: 1. do not fundamentally eliminate gradient pathologies and 2.their training still scales poorly with sequence length. 
 
 Transformer recurrence, as we defined, entails explicit memory whose size, structure, and update rules can be designed, inspected, logged, reset, or even edited by other agents. 
