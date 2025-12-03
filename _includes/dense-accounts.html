@@ -1,0 +1,47 @@
+<section class="dense-accounts">
+  <h3>Lightweight account (local)</h3>
+  <p class="dense-accounts-note">
+    Sign in with an email to set a handle and keep a small “delta log.” This is local-only; no email is actually sent.
+  </p>
+  <form data-dense-login-form>
+    <label for="dense-email">Email for magic link</label>
+    <input id="dense-email" type="email" name="dense_email" placeholder="you@example.com">
+    <button type="submit">Send magic link (simulate)</button>
+  </form>
+
+  <div data-dense-profile hidden>
+    <h4>Profile</h4>
+    <label for="dense-handle">Handle</label>
+    <input id="dense-handle" type="text" name="dense_handle" placeholder="handle (used in comments)">
+
+    <label for="dense-bio">Short bio (100 chars)</label>
+    <input id="dense-bio" type="text" name="dense_bio" maxlength="100" placeholder="e.g. robotics + macro, learning in public">
+
+    <label for="dense-status">Currently reading / building</label>
+    <input id="dense-status" type="text" name="dense_status" placeholder="what you are focused on">
+
+    <label for="dense-links">Repos / papers (comma-separated URLs)</label>
+    <textarea id="dense-links" name="dense_links" placeholder="https://github.com/…, https://arxiv.org/abs/…"></textarea>
+
+    <button type="button" data-dense-profile-save>Save profile (local)</button>
+
+    <p class="dense-profile-summary"></p>
+
+    <section class="dense-delta-log">
+      <h4>Delta log</h4>
+      <p class="dense-accounts-note">
+        Track “I changed my mind on X” events with a short note and links.
+      </p>
+      <ul class="dense-delta-list"></ul>
+      <form class="dense-delta-form">
+        <label for="dense-delta-topic">Topic</label>
+        <input id="dense-delta-topic" type="text" name="dense_delta_topic" placeholder="What did you change your mind about?">
+
+        <label for="dense-delta-note">Note / evidence</label>
+        <textarea id="dense-delta-note" name="dense_delta_note" placeholder="What evidence moved you? Links welcome."></textarea>
+
+        <button type="submit">Add Δ (local)</button>
+      </form>
+    </section>
+  </div>
+</section>

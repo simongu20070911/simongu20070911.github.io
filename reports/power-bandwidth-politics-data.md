@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Power–Bandwidth–Politics: Data Appendix
+title: "Power–Bandwidth–Politics: Data Appendix"
 permalink: /reports/power-bandwidth-politics-data/
 ---
 
@@ -148,4 +148,3 @@ Nuclear PPAs (selected)
 ---
 
 Raw CSVs live under <code>/assets/data/</code>, and the full workbook is at <code>/assets/sheets/power-bandwidth-politics.xlsx</code>.
-

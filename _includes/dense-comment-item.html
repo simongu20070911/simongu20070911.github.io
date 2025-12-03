@@ -1,0 +1,41 @@
+{% assign c = include.comment %}
+<li class="dense-comment"
+    data-depth="{{ include.depth }}"
+    data-handle="{{ c.handle }}"
+    {% if c.tags %}data-tags="{{ c.tags | join: ',' }}"{% endif %}>
+  <div class="dense-comment-meta">
+    <span class="dense-comment-handle">{{ c.handle }}</span>
+    {% if c.role %}
+      <span class="dense-comment-role">{{ c.role }}</span>
+    {% endif %}
+    {% if c.tags %}
+      <span class="dense-comment-tags">
+        {% for tag in c.tags %}
+          <span class="dense-tag">{{ tag }}</span>
+        {% endfor %}
+      </span>
+    {% endif %}
+    <span class="dense-comment-density" aria-label="Information density indicator"></span>
+  </div>
+  <div class="dense-comment-body">
+    {{ c.body | markdownify }}
+  </div>
+  <div class="dense-comment-footer">
+    <button type="button" class="dense-comment-reply-button">Reply</button>
+    <button type="button" class="dense-comment-report-button">Report</button>
+    <div class="dense-report-menu">
+      <button type="button" data-report-reason="handwavey">handwavey</button>
+      <button type="button" data-report-reason="confident-no-sources">confident but source-free</button>
+      <button type="button" data-report-reason="ad-hominem">ad hominem</button>
+    </div>
+  </div>
+  {% if c.replies %}
+    <ol class="dense-comment-children">
+      {% assign next_depth = include.depth | plus: 1 %}
+      {% for reply in c.replies %}
+        {% include dense-comment-item.html comment=reply depth=next_depth %}
+      {% endfor %}
+    </ol>
+  {% endif %}
+</li>
+

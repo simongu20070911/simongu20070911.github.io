@@ -1,0 +1,29 @@
+{% assign slug = include.slug %}
+{% assign config = site.data.dense_annotations[slug] %}
+{% if config %}
+  {% assign pinned = config.pinned %}
+{% else %}
+  {% assign pinned = empty %}
+{% endif %}
+<section class="dense-annotations"
+         data-thread-slug="{{ slug }}"
+         data-pinned-annotations='{{ pinned | jsonify | escape }}'>
+  <div class="dense-annotations-header">
+    <h3>Inline annotations</h3>
+    <label class="dense-annotations-toggle">
+      <input type="checkbox" data-annotations-toggle>
+      Show margin notes
+    </label>
+  </div>
+  <ul class="dense-annotation-list"></ul>
+  <form class="dense-annotation-form">
+    <label for="annotation_quote_{{ slug }}">Quote from this post</label>
+    <input id="annotation_quote_{{ slug }}" type="text" name="annotation_quote" placeholder="Paste the sentence you are annotating.">
+
+    <label for="annotation_note_{{ slug }}">Your note</label>
+    <textarea id="annotation_note_{{ slug }}" name="annotation_note" placeholder="Attach a short margin note."></textarea>
+
+    <button type="submit">Add annotation (local)</button>
+  </form>
+</section>
+

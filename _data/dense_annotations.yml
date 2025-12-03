@@ -1,0 +1,48 @@
+welcome-to-my-blog:
+  pinned:
+    - quote: "Default view: comments with at least one reference, equation, or explicit disagreement."
+      note: "Pinned rule of thumb for what qualifies as a “frontier conversation.”"
+      handle: "Simon"
+
+ai-robotics-latent-space-control:
+  pinned:
+    - quote: "Very short prediction horizons for reflex control (say 10–30 ms) with frequent re-encode from pixels."
+      note: "Anchor for how “reflex” is defined here: interpolation between perception ticks, not long-horizon imagination."
+      handle: "Simon"
+
+ultrathink-protocol-manifesto:
+  pinned:
+    - quote: "The labels “executive” and “judicial” are mostly to make it legible to human overseers."
+      note: "Design goal: use familiar metaphors as scaffolding, keep the real invariants in separation of concerns and failure modes."
+      handle: "Simon"
+
+ultrathink-technical-analysis:
+  pinned:
+    - quote: "It penalizes corner solutions where you maximize, say, GDP per capita while letting social trust collapse."
+      note: "Why a geometric mean: it encodes a hard dislike of one-dimensional optimization."
+      handle: "Simon"
+
+abundant-intelligence-market-cap-scenario:
+  pinned:
+    - quote: "That is not a forecast, it is a mapping from assumptions to outputs."
+      note: "Pinned epistemic hygiene: treat every valuation as a conditional story, not a prophecy."
+      handle: "Simon"
+
+nvda-vs-amd-moat-analysis:
+  pinned:
+    - quote: "If AMD remains “the chip you use when NVIDIA is sold out,” that is not seven powers, that is temporary arbitrage."
+      note: "Core thesis test: does AMD graduate from relief valve to default choice anywhere?"
+      handle: "Simon"
+
+power-bandwidth-politics-condition:
+  pinned:
+    - quote: "My “institutions first” claim is about global constraints, not local thermodynamics."
+      note: "The frame for this post: grids, queues, and politics bind before Landauer does."
+      handle: "Simon"
+
+the-new-recurrent-model:
+  pinned:
+    - quote: "Think of it like learning to take better notes rather than letting a student retroactively rewrite the textbook."
+      note: "Analogy that ties compaction policy back to human-readable safeguards."
+      handle: "Simon"
+

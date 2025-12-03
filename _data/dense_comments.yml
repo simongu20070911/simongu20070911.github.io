@@ -1,0 +1,516 @@
+welcome-to-my-blog:
+  title: "Welcome to My Blog!"
+  comments:
+    - handle: "@latent_latte"
+      role: reader
+      tags: [meta, scope]
+      body: |
+        This reads like “LessWrong meets GitHub issues.” Practically speaking, what is in scope here? You mention “technology, reflections, discoveries” but your other posts are like macro scenario generators and robot control stacks. Are you imagining this more as public lab notebook, or occasional polished essays?
+      replies:
+        - handle: "Simon"
+          role: author
+          tags: [author, meta]
+          body: |
+            Leaning hard toward “public lab notebook with commit messages written in English.”
+
+            The rule I use in my head: if a thought might later anchor code, a model, or an experiment, it belongs here. That covers:
+
+            - methods (how to model 52 GW / year AI capex)
+            - architectures (latent-space reflex control, new recurrent setups)
+            - governance frameworks (ULTRATHINK, resource allocation ideas)
+
+            Personal reflections show up only where they change how I model something. So you will not see daily-life journaling, but you will see “what I learned from mispricing AMD” if it updates my mental models.
+    - handle: "@cat_on_cuda"
+      role: reader
+      tags: [meta, moderation]
+      body: |
+        Are you going to moderate for “density”? I kind of want a filter that hides one-line “cool post” comments and only shows stuff with an actual argument.
+      replies:
+        - handle: "Simon"
+          role: author
+          tags: [author, moderation]
+          body: |
+            Yes. The current plan:
+
+            - Default view: comments with at least one of:
+              - reference / link
+              - equation or concrete claim
+              - explicit disagreement with a quote from the post
+            - “All comments” view available, but opt-in.
+
+            Think of the front page as “frontier conversations” and the rest as background noise you can dig into if you want the full social context.
+    - handle: "@anonymous_poincare"
+      role: reader
+      tags: [meta, epistemics]
+      body: |
+        Suggestion for the site: a per-user “delta log” where you can mark “I changed my mind on X” with a short note and link. Makes epistemic humility legible and trackable over time.
+      replies:
+        - handle: "Simon"
+          role: author
+          tags: [author, epistemics]
+          body: |
+            I like that. Implementable as:
+
+            - each user can attach a “Δ” to a past comment
+            - “Δ” object stores:
+              - what you changed your mind about
+              - what evidence moved you
+              - links to old and new positions
+
+            Then your profile shows “Deltas I have filed,” which is probably a better status metric than “posts I have written.”
+
+ai-robotics-latent-space-control:
+  title: "The Missing Piece in Robotics: Real-Time Reflex Control Through Latent Space Prediction"
+  comments:
+    - handle: "@rigid_body_dynamics"
+      role: reader
+      tags: [robotics, control]
+      body: |
+        Robotics PhD here. Love the latent-only loop, but I have two concerns:
+
+        1. You speak of “sub-10 ms reflex arcs” using video model latents. In practice, from sensor exposure to motor torque you have:
+           - image sensor readout
+           - VAE encode
+           - latent predictor
+           - motor control trajectory generation
+
+           Even with high-end embedded hardware, that stack is nontrivial. Have you sketched a timing budget?
+
+        2. Latent prediction given actions is brilliant for short horizons, but brittle over longer ones if your action space is rich. How are you thinking about compounding error in latent space without constantly re-anchoring to pixels?
+      replies:
+        - handle: "Simon"
+          role: author
+          tags: [author, robotics]
+          body: |
+            Great questions.
+
+            1. Timing budget: rough numbers on commodity-ish hardware:
+               - Global shutter sensor + DMA into GPU memory: ~1–2 ms
+               - VAE encode at 256×256 into 4×64×64 latent tensor with a small ConvNet: ~1 ms
+               - Action-conditioned predictor (tiny Transformer or ConvNet) for horizon 1: well under 1 ms if we stay compact
+               - Low-level motor PD loop runs on a separate microcontroller at 1 kHz regardless
+
+               The key is that the latent predictor is not doing “perception from scratch” every cycle; it is updating an already structured latent state. You still need careful pipeline engineering, but we are in the right order of magnitude.
+
+            2. On compounding error: I see three stabilizers.
+               - Very short prediction horizons for reflex control (say 10–30 ms) with frequent re-encode from pixels. The predictor is then more like a Jacobian estimator than a long-horizon simulator.
+               - Learned “consistency losses” that penalize latent trajectories which decode to physically implausible frames, even if they match the next latent.
+               - Occasional full reconstruction and comparison for drift detection. When decoded predictions diverge from decoded observations, you treat that as “surprise” and either fall back to a safer policy or retrain.
+
+            So I am explicitly not advocating pure latent imagination for seconds at a time for safety-critical control. I want a reflex arc that uses latents to interpolate between expensive perception ticks.
+    - handle: "@proprioceptive_cat"
+      role: reader
+      tags: [robotics, sensing]
+      body: |
+        Have you thought about incorporating non-visual latent channels? Like joint encoders and force sensors compressed into the same latent, so the system “feels” as well as “sees” in the same space?
+      replies:
+        - handle: "Simon"
+          role: author
+          tags: [author, robotics]
+          body: |
+            Yes, and I think it is essential.
+
+            What I have in mind:
+
+            - Multi-modal encoder that ingests:
+              - RGB or depth
+              - proprioception
+              - touch / force
+            - Maps all of it into a common latent state vector.
+
+            Then the predictor evolves that joint latent given actions. That is closer to what biological systems are doing: visual cortex is not the only loop, you have fast spinal loops for proprioception and skin.
+
+            Also, from a control perspective, tactile + joint information often updates at higher frequency than vision. So you can interleave “light” latent updates that use only proprio/force and “heavy” ones that include a fresh image encode.
+    - handle: "@gradient_therapist"
+      role: reader
+      tags: [theory, philosophy]
+      body: |
+        This sounds suspiciously like you are trying to smuggle in a story about “consciousness as prediction error in latent space” without saying the word. Any plans to poke at that more directly, or do you want to stay in the engineering lane?
+      replies:
+        - handle: "Simon"
+          role: author
+          tags: [author, engineering]
+          body: |
+            I am deliberately staying on the engineering side here. My rule of thumb: if we cannot wire it to a motor, I should not pretend it is engineering.
+
+            The bridge is:
+
+            - prediction error in latent space → “surprise” signal
+            - surprise drives both:
+              - updating your world model
+              - updating your reflex policy
+
+            Whether that corresponds to anything like “experience” is above my pay grade. I am happy if we can get robots that do not knock mugs off tables when a human bumps them.
+
+ultrathink-protocol-manifesto:
+  title: "The ULTRATHINK Protocol: A Manifesto for a Post-Scarcity, Artificially Governed World"
+  comments:
+    - handle: "@governance_nerd"
+      role: reader
+      tags: [governance, institutions]
+      body: |
+        The manifesto frames ULTRATHINK as a constitutional AI with three branches that mirror a state. That is elegant, but I worry you are re-importing the pathologies of human institutions.
+
+        Specifically: why assume a tripartite separation of powers is optimal for a HEPA-scale system? We know it was a hack around human incentives. With digital agents you can design different checks and balances entirely.
+      replies:
+        - handle: "Simon"
+          role: author
+          tags: [author, governance]
+          body: |
+            I do not think three branches is metaphysically optimal. I am using it as a scaffolding that:
+
+            - humans already understand
+            - has a vocabulary of “veto,” “judicial review,” “treasury” that maps well to what we want the system to do.
+
+            If we ever prove that some other decomposition (for example “optimizers vs critics vs auditors” in a control-theoretic sense) is more stable, ULTRATHINK should migrate.
+
+            The important bits are:
+
+            - clear separation between:
+              - directive generation
+              - execution
+              - constraint checking and self-modification
+            - explicit failure modes and “safe modes”
+
+            The labels “executive” and “judicial” are mostly to make it legible to human overseers.
+    - handle: "@sybil_slayer"
+      role: reader
+      tags: [governance, alignment]
+      body: |
+        The manifesto leans on Sybil-resistance and sophisticated voting schemes. But if ULTRATHINK eventually controls the treasury of a post-scarcity economy, why keep humans in the loop at all? Would it not be more stable to treat humans as input signals and let the system optimize HBI directly?
+      replies:
+        - handle: "Simon"
+          role: author
+          tags: [author, alignment]
+          body: |
+            That is exactly the attractor I am trying to avoid.
+
+            Reasons to keep humans structurally in the loop:
+
+            1. Value uncertainty. We do not have a closed-form, once-and-for-all definition of HBI. It needs ongoing, contested input.
+            2. Legitimacy. Even if ULTRATHINK had perfect epistemic access to what maximizes HBI, people will not accept outcomes that look alien or imposed.
+            3. Error correction. A system that can unilaterally change its own objectives, overseers, and reward function is not aligned. You need irreducible external veto points, even if they are slower and noisier.
+
+            So the voting and citizen panels are not decoration. They are the non-optimizable parts that keep the optimizer boxed.
+    - handle: "@postscarcity_skeptic"
+      role: reader
+      tags: [economics, competition]
+      body: |
+        Your HEPA definition assumes C_HEPA < C_H for all q, which drives the monopoly lemma. But historically, technologies that have huge fixed costs and low marginal costs still end up with multiple firms because regulation, geography, and coordination problems exist. Are you not overstating the tendency to a single global HEPA?
+      replies:
+        - handle: "Simon"
+          role: author
+          tags: [author, economics]
+          body: |
+            The lemma is intentionally “physics-plus-incentives” and intentionally ignores politics. It is there to show that, absent explicit countermeasures, the economic logic pushes you toward monopoly.
+
+            Then the rest of ULTRATHINK is about countering that pull:
+
+            - you constitutionalize constraints on concentration
+            - you require transparent treasuries
+            - you allow for multiple instantiations with shared guardrails
+
+            We should assume that every opportunistic force in the system will try to instantiate the “pure HEPA monopoly” attractor. Governance exists to keep that in the “forbidden region.”
+
+ultrathink-technical-analysis:
+  title: "ULTRATHINK Technical Analysis: A Rigorous Economic and Governance Framework"
+  comments:
+    - handle: "@mathy_minsky"
+      role: reader
+      tags: [economics, formalism]
+      body: |
+        Two related questions:
+
+        1. Your deflationary collapse lemma assumes that wage income goes to zero and that there is no automatic mechanism for redirecting HEPA surplus to households. But if HBI-maximization is the prime directive, would not the system automatically implement something like UBI, even without being told?
+        2. The HBI is defined as a weighted geometric mean. Have you considered the implications of that choice versus, say, a weighted sum or a max-min criterion? Geometric means are very harsh on low values, which might push ULTRATHINK to overspend on the worst-off metric.
+      replies:
+        - handle: "Simon"
+          role: author
+          tags: [author, economics]
+          body: |
+            1. On UBI “for free”:
+
+               The HBI objective is high level. The system still needs concrete mechanisms to get there. If you do not specify that redistributive mechanisms which keep aggregate demand nonzero are allowed, you can get pathological “local maxima” where the system keeps goods cheap, but people are too broke to buy them and institutions are too weak to pass a UBI law. ULTRATHINK should not assume that good things happen automatically because they are instrumentally convergent. It should encode them.
+
+            2. On geometric mean:
+
+               Yes, the choice is deliberate. Reasons:
+
+               - It penalizes corner solutions where you maximize, say, GDP per capita while letting social trust collapse.
+               - It is multiplicative, which matches the intuition that some dimensions of human flourishing amplify each other nonlinearly.
+
+               But you are right that it can overweight low values. One way to manage that is to design the H, L, E, S sub-indices with caps and floors so that e.g. a small improvement in an already catastrophic situation does not dominate all other considerations forever. The technical appendix I have in mind would spell out these functional forms.
+    - handle: "@control_theorist"
+      role: reader
+      tags: [control, safety]
+      body: |
+        Loved the “graceful degradation” parts. Have you thought about formalizing ULTRATHINK as a hierarchical control system explicitly, with HBI as the reference signal, and show that the defense-in-depth mechanisms guarantee bounded error under certain perturbations?
+      replies:
+        - handle: "Simon"
+          role: author
+          tags: [author, control]
+          body: |
+            Yes, very roughly:
+
+            - treat the “executive” as a high-level controller generating policy proposals
+            - “operational desks” as plant plus low-level controllers
+            - “constitutional branch” as supervisory layer that monitors system state and model uncertainty
+
+            Then graceful degradation is a set of pre-defined modes where:
+
+            - you reduce effective controller bandwidth
+            - you restrict the set of admissible actions
+            - you increase safety margins when the CFE says “our model divergence is too high”
+
+            I have not yet turned this into a proper Lyapunov-style stability proof. My guess is that you can get “bounded regret relative to safe baseline” under some assumptions about how quickly the CFE can detect regime shifts.
+
+abundant-intelligence-market-cap-scenario:
+  title: "Abundant Intelligence: Who Wins a 52 GW per Year AI Build-Out"
+  comments:
+    - handle: "@equity_curve_enjoyer"
+      role: reader
+      tags: [markets, macro]
+      body: |
+        The scenario is crisp, but I am curious about your discount rate choice. You use 10 percent with 3 percent terminal growth for almost everyone. That feels like a world where rates remain structurally low despite huge capex and political risk. Did you test a world where the risk-free rate sits at 5–6 percent for a decade?
+      replies:
+        - handle: "Simon"
+          role: author
+          tags: [author, markets]
+          body: |
+            Yes. In a 5–6 percent risk-free environment:
+
+            - equity costs of capital widen
+            - multiples compress almost across the board
+            - the present value of the 2026–2034 ramp shrinks
+
+            Qualitatively:
+
+            - capital-light suppliers (NVDA, AMD, HBM vendors) suffer less because they do not fund the plants
+            - hyperscalers see more severe multiple compression unless they can push capex off-balance-sheet
+
+            The more interesting thing is that high-rate scenarios make alternative models of ownership (customer co-ops, government-backed infra funds) more attractive. That is where the ULTRATHINK treasury ideas start talking to this essay.
+    - handle: "@grid_gremlin"
+      role: reader
+      tags: [power, infrastructure]
+      body: |
+        You model 52 GW per year as if the grid quietly absorbs it at 6.5 cents per kWh. In your “Power–Bandwidth–Politics” post you seem more skeptical. If power clears instead at 10–12 cents, who eats the margin compression in your table?
+      replies:
+        - handle: "Simon"
+          role: author
+          tags: [author, power]
+          body: |
+            Short answer: mostly the hyperscalers and any “AI cloud” layer that has promised fixed-price contracts.
+
+            In a world where:
+
+            - power prices clear higher
+            - utilization is lower than modeled
+            - and regulators limit pass-through to end customers
+
+            then profit pools shift:
+
+            - GPU vendors still sell silicon at negotiated prices because their cost base is not dominated by electricity
+            - cloud providers’ gross margin shrinks
+            - service-layer firms without infrastructure (the “app layer”) suffer indirectly through higher API costs
+
+            That scenario also pushes more pressure onto efficiency improvements and workload scheduling. Energy-constrained training may push more research into sparse and neuromorphic architectures.
+    - handle: "@amd_bagholder"
+      role: reader
+      tags: [markets, personal]
+      body: |
+        I bought AMD after reading your moat piece. The stock did rip, but in this model AMD’s cap goes to 1.3 trillion. How do you personally avoid getting high on your own spreadsheets?
+      replies:
+        - handle: "Simon"
+          role: author
+          tags: [author, epistemics]
+          body: |
+            By treating the model as a conditional story:
+
+            - “If 52 GW per year is funded and if market structure looks like X, then AMD’s cash flows look like Y, which under these valuation norms implies Z.”
+
+            That is not a forecast, it is a mapping from assumptions to outputs. The discipline is:
+
+            - keep assumptions explicit
+            - track when reality diverges
+            - file deltas when I change my mind
+
+            Also, I size my own positions so that I can sleep through a 50 percent drawdown without needing to believe my model more than I should.
+
+nvda-vs-amd-moat-analysis:
+  title: "NVIDIA vs. AMD: Seven Powers, One Market Supercycle"
+  comments:
+    - handle: "@seven_powers_stan"
+      role: reader
+      tags: [strategy, competition]
+      body: |
+        I like your use of Helmer’s framework, but I think you underplay NVIDIA’s process power. They are not just better at rack integration, they are building an entire design-and-validation pipeline with feedback from a thousand customers. AMD’s MI300 wins are real but still look like point solutions.
+
+        What is the empirical signal you are watching to decide whether AMD’s “counter-positioning” is actually translating into durable power, not just “we are the cheaper second source for a cycle”?
+      replies:
+        - handle: "Simon"
+          role: author
+          tags: [author, strategy]
+          body: |
+            Three signals I watch:
+
+            1. Tooling maturity. If, two years from now, ROCm-based stacks are as “boring” and reliable as CUDA is today for 80 percent of workloads, that is real. If instead we see constant “we had to hack this kernel” threads, it is a warning sign.
+            2. Design-ins beyond hyperscalers. Hyperscalers are structurally motivated to multi-source. The harder test is whether independent AI infrastructure providers and big on-prem buyers pick MI parts as their default for at least some use cases.
+            3. Ecosystem stickiness. Do we see third-party vendors (profilers, low-level libraries, verticalized SaaS) treating ROCm as first-class, or just as an optional port?
+
+            If AMD remains “the chip you use when NVIDIA is sold out,” that is not seven powers, that is temporary arbitrage.
+    - handle: "@regulator_404"
+      role: reader
+      tags: [policy, regulation]
+      body: |
+        You mention regulatory risk but mostly from the angle of export controls and mega-deals. There is another angle: what if regulators force functional separation between “GPU vendor” and “cloud provider,” limiting NVIDIA’s ability to vertically integrate into DGX Cloud like models?
+      replies:
+        - handle: "Simon"
+          role: author
+          tags: [author, policy]
+          body: |
+            Indeed, that is a tail risk worth watching.
+
+            If regulators decide that:
+
+            - owning both the dominant accelerator and a major cloud creates unacceptable lock-in,
+
+            they could enforce:
+
+            - structural separation (hard split)
+            - or behavioral remedies (nondiscrimination, mandatory licensing on FRAND terms)
+
+            For NVIDIA, that would:
+
+            - protect the hardware profit pool
+            - but cap upside from moving up the stack into services
+
+            For AMD, it could be a relative positive because buyers would feel less need to control them as a potential walled-garden risk.
+
+            So yes, another reason I tend to give AMD more relative upside in extreme success scenarios.
+
+power-bandwidth-politics-condition:
+  title: "The Power–Bandwidth–Politics Condition: Why the Compute Race Is Conditionally Unbounded"
+  comments:
+    - handle: "@landauer_lurker"
+      role: reader
+      tags: [physics, infrastructure]
+      body: |
+        You argue that physics is not the binding constraint this decade and that institutions are. Yet you also cite Landauer and efficiency trends. I feel you are underweighting the possibility that we simply hit cooling density walls in real data centers, even before we hit global power or political limits.
+
+        Thoughts on near-field cooling, immersion, or radical data-center design changes? Does any part of your argument hinge on air-cooled racks?
+      replies:
+        - handle: "Simon"
+          role: author
+          tags: [author, infrastructure]
+          body: |
+            I completely agree we are running into cooling density limits at the rack and building level.
+
+            My “institutions first” claim is about global constraints, not local thermodynamics. Locally, you absolutely hit:
+
+            - maximum heat per rack
+            - maximum floor loading per data hall
+            - maximum water availability for certain cooling designs
+
+            I am implicitly assuming that:
+
+            - immersion and cold-plate designs get standardized enough to roll out at scale
+            - compute hubs are placed where water or alternative cooling resources are available
+
+            If that assumption fails, then the effective “power per useful rack” lower bound is much higher, and my optimistic 52 GW scenarios get squeezed.
+
+            The nice thing is that cooling is mostly an engineering problem with known physics and clear ROI, not a fundamental mystery. The politics of building new transmission lines is, in practice, often harder than adding a heat exchanger.
+    - handle: "@queue_theorist"
+      role: reader
+      tags: [policy, queues]
+      body: |
+        The interconnection-queue discussion in your post was fascinating. Have you thought about modeling the queue itself as a strategic battleground? For example, if hyperscalers over-file projects to crowd out others, what does that do to the timeline for independent compute providers?
+      replies:
+        - handle: "Simon"
+          role: author
+          tags: [author, policy]
+          body: |
+            Yes, there are ugly incentives:
+
+            - If the queue is first-come, first-served with weak penalties for dropping projects, then large players can “reserve” capacity with many placeholder projects.
+            - Smaller firms, municipal data centers, or labs get stuck behind a wall of speculative applications.
+
+            Mitigations include:
+
+            - higher application fees refundable only upon interconnection
+            - stricter milestones
+            - some notion of “public-interest priority”
+
+            This is one place where “politics” really is the constraint. The physics does not care whether the next 300 MW go to Meta or to a university cluster. But queue rules and bargaining power do.
+
+the-new-recurrent-model:
+  title: "The Very Much Programmable New Recurrent Neural Net"
+  comments:
+    - handle: "@rl_time_traveler"
+      role: reader
+      tags: [rl, architecture]
+      body: |
+        Love the framing: “transformer + explicit compaction policy = new kind of RNN.” I have two technical worries:
+
+        1. Credit assignment. If you compact at step t and only see task success or failure at t + 10,000, your RL signal is insanely delayed and noisy. How do you avoid the compaction policy just thrashing?
+        2. Speculative memory corruption. Letting a model rewrite its own history seems like a recipe for planting the wrong evidence and then sincerely believing it. How do humans audit what the model “remembers” after many compaction cycles?
+      replies:
+        - handle: "Simon"
+          role: author
+          tags: [author, rl]
+          body: |
+            1. On credit assignment:
+
+               You want a curriculum.
+
+               - Start with tasks where the payoff is close to the compaction event.
+               - Treat compaction as a bandit problem at first: you test multiple compactions in parallel and compare downstream loss.
+               - Introduce “auxiliary reconstruction heads” that encourage the compact state to retain the ability to regenerate task-relevant details, so gradient flows from supervised losses as well.
+
+               Over time, you can stretch the horizon once the policy has a decent prior on “what tends to be useful later.”
+
+            2. On memory corruption:
+
+               Agree this is a real risk. Transparency mitigations I have in mind:
+
+               - Log raw context windows alongside compact states for a sample of episodes and audit them offline.
+               - Force the model to output, in natural language, a short justification for each compaction: “I kept X, dropped Y because Z.” It will not be perfectly faithful, but it gives humans hooks.
+               - Use independent “critic models” that judge whether a given compact state looks lossy in dangerous ways for a class of tasks.
+
+               Think of it like learning to take better notes rather than letting a student retroactively rewrite the textbook.
+    - handle: "@cortex_fiction"
+      role: reader
+      tags: [theory, analogy]
+      body: |
+        This sounds a lot like your ULTRATHINK constitutional court: a separate critic that examines whether new “laws” (compacted memories) preserve enough of the original intent. Do you see these as philosophically connected or am I galaxy-braining?
+      replies:
+        - handle: "Simon"
+          role: author
+          tags: [author, theory]
+          body: |
+            I do see a rhyme.
+
+            In both cases you have:
+
+            - a powerful optimizer that wants to compress reality into a manageable state
+            - a risk that in doing so it drops inconvenient or safety-critical information
+            - some external or slower process that checks “did we throw away the wrong detail?”
+
+            The tools differ (formal verification vs empirical audits), but the pattern is “separate the entity that changes the state from the entity that approves the change.”
+    - handle: "@token_bucket"
+      role: reader
+      tags: [ux, interpretation]
+      body: |
+        Do you imagine exposing the compact state directly to users or only using it internally? Because the moment you surface it, people will start treating it as a kind of “soul file.”
+      replies:
+        - handle: "Simon"
+          role: author
+          tags: [author, ux]
+          body: |
+            I would not anthropomorphize it that much, but yes, if we surface compact states we need to be clear what they are:
+
+            - a lossy, task-optimized summary
+            - not a faithful transcript
+            - not an exhaustive world model
+
+            I lean toward exposing them in controlled research settings first, so people can get an intuition for how they evolve, before turning them into user-visible artifacts in mainstream products.
+

@@ -1,0 +1,111 @@
+welcome-to-my-blog:
+  replication:
+    summary: >
+      Orientation post; no code or datasets attached yet. Use this box later
+      for changelogs and links to “how this blog works” notes.
+    links: []
+  extensions: []
+
+ai-robotics-latent-space-control:
+  replication:
+    summary: >
+      Sketch-level engineering note for latent-space reflex control. Future
+      iterations could link timing-budget notebooks and hardware experiments.
+    links:
+      - label: "Latency budget worksheet (placeholder)"
+        url: "#"
+        note: "Swap this out for a real repo or notebook when available."
+  extensions:
+    - title: "Multi-modal latent reflex prototype"
+      author: "@proprioceptive_cat"
+      url: "#"
+
+ultrathink-protocol-manifesto:
+  replication:
+    summary: >
+      Conceptual manifesto; no runnable code. Treat this box as the home for
+      constitutional drafts, diagrams, and governance simulations.
+    links: []
+  extensions:
+    - title: "Alternative branch decompositions"
+      author: "@governance_nerd"
+      url: "#"
+
+ultrathink-technical-analysis:
+  replication:
+    summary: >
+      Technical appendix in progress. This slot is for formal lemmas, toy
+      models, and numerical experiments around HBI and HEPA dynamics.
+    links: []
+  extensions:
+    - title: "HBI objective sensitivity notebook"
+      author: "@mathy_minsky"
+      url: "#"
+
+abundant-intelligence-market-cap-scenario:
+  replication:
+    summary: >
+      Scenario workbook and scripts for the 52 GW per year build-out model.
+      The links below point at the current Python driver and CSV outputs.
+    links:
+      - label: "Market-cap model (Python)"
+        url: "/assets/abundant-intelligence/market_cap_model.py"
+        note: "Core script generating cash-flow and valuation scenarios."
+      - label: "Scenario summary (CSV)"
+        url: "/assets/abundant-intelligence/scenario_summary.csv"
+        note: "Condensed results by scenario."
+      - label: "Incremental cashflows (CSV)"
+        url: "/assets/abundant-intelligence/incremental_cashflows.csv"
+        note: "Per-scenario incremental cash flow table."
+  extensions:
+    - title: "Alternative rate-path stress tests"
+      author: "@equity_curve_enjoyer"
+      url: "#"
+
+nvda-vs-amd-moat-analysis:
+  replication:
+    summary: >
+      Qualitative moat analysis anchored to the same scenario engine as
+      “Abundant Intelligence.” Use these links when cross-referencing cash
+      flows and share assumptions.
+    links:
+      - label: "Scenario engine (Python)"
+        url: "/assets/abundant-intelligence/market_cap_model.py"
+        note: "Shared driver used for NVDA vs AMD comparisons."
+      - label: "NVDA vs AMD sensitivities"
+        url: "/assets/abundant-intelligence/nvda_sensitivity_asp_share.csv"
+        note: "Example sensitivity slice; see repo for more variants."
+  extensions:
+    - title: "Regulation-constrained moat scenarios"
+      author: "@regulator_404"
+      url: "#"
+
+power-bandwidth-politics-condition:
+  replication:
+    summary: >
+      All charts in this post are backed by explicit CSVs and an Excel
+      workbook. The links below mirror what is already referenced inline.
+    links:
+      - label: "Workbook (Excel)"
+        url: "/assets/sheets/power-bandwidth-politics.xlsx"
+        note: "Single workbook with tables, charts, and sources."
+      - label: "CSV bundle"
+        url: "/assets/data"
+        note: "Directory containing the individual CSV files used here."
+  extensions:
+    - title: "Interconnection queue agent-based model"
+      author: "@queue_theorist"
+      url: "#"
+
+the-new-recurrent-model:
+  replication:
+    summary: >
+      Design sketch for a programmable recurrent architecture. This slot is
+      meant for reference implementations and training scripts once they
+      stabilize.
+    links: []
+  extensions:
+    - title: "Compaction-policy curriculum experiments"
+      author: "@rl_time_traveler"
+      url: "#"
+

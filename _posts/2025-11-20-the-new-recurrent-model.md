@@ -24,3 +24,12 @@ RL is applied as follows: whenever it succeeds, the compaction policy is rewarde
 
 This is conceptually close to how people learn to keep better notes or tell tighter stories: feedback comes not from the elegance of the summary itself but from how well it supports future goals. 
 The frontier I think lies in designing memory representations, reward signals, and training curricula that make this self editing, self compressing style of model robust at scale.
+
+{% if site.dense_features.enabled %}
+<p class="dense-multi-part-link">
+  <a href="{{ page.url | relative_url }}?show_multi_part">
+    Show multi-part comments, metrics, and lab chat
+  </a>
+</p>
+{% include dense-multi-part.html slug="the-new-recurrent-model" %}
+{% endif %}

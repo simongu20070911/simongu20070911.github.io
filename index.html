@@ -31,3 +31,8 @@ nav_exclude: true
   
   <p class="rss-subscribe">Subscribe <a href="{{ "/feed.xml" | relative_url }}">via RSS</a></p>
 </div>
+
+{% if site.dense_features.email_feeds %}
+{% include dense-assets.html %}
+{% include dense-email-feeds.html %}
+{% endif %}

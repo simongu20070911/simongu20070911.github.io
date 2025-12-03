@@ -1,0 +1,653 @@
+/* Dense, gated experimental UI components
+ * These only become visible when:
+ *   1) site.dense_features.enabled is true (Jekyll config), AND
+ *   2) the current URL includes ?show_multi_part (handled in dense.js).
+ */
+
+[data-requires-show-multi-part="true"] {
+  display: none;
+}
+
+html[data-show-multi-part="true"] [data-requires-show-multi-part="true"] {
+  display: block;
+}
+
+.dense-multi-part {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e5e7eb;
+  font-size: 0.95rem;
+}
+
+.dense-multi-part h2,
+.dense-multi-part h3 {
+  font-size: 1.05rem;
+  margin-top: 0;
+}
+
+.dense-post-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 1.75rem;
+  padding: 0.75rem 0.75rem 0.5rem;
+  background: #f9fafb;
+  border-radius: 0.5rem;
+  border: 1px solid #e5e7eb;
+}
+
+.dense-metric-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.dense-metric-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #6b7280;
+}
+
+.dense-metric-value {
+  font-weight: 600;
+  color: #111827;
+}
+
+.dense-depth-bar {
+  position: relative;
+  width: 200px;
+  max-width: 100%;
+  height: 6px;
+  border-radius: 999px;
+  background: #e5e7eb;
+  overflow: hidden;
+}
+
+.dense-depth-bar-fill {
+  position: absolute;
+  inset: 0;
+  width: 0%;
+  background: linear-gradient(90deg, #2563eb, #059669);
+  transition: width 0.4s ease-out;
+}
+
+.dense-depth-text {
+  font-size: 0.8rem;
+  color: #4b5563;
+}
+
+.dense-replication-box {
+  margin-bottom: 1.75rem;
+  padding: 1rem 1rem 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid #d1d5db;
+  background: #fefce8;
+}
+
+.dense-replication-box h2 {
+  margin-bottom: 0.4rem;
+}
+
+.dense-replication-box p {
+  margin-bottom: 0.5rem;
+}
+
+.dense-replication-links {
+  list-style: none;
+  padding: 0;
+  margin: 0.25rem 0 0.5rem;
+}
+
+.dense-replication-links li {
+  margin-bottom: 0.25rem;
+}
+
+.dense-replication-note {
+  font-size: 0.8rem;
+  color: #6b7280;
+  margin-left: 0.35rem;
+}
+
+.dense-extensions summary {
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.dense-extensions ul {
+  margin: 0.5rem 0 0.25rem;
+  padding-left: 1rem;
+}
+
+.dense-extensions li {
+  margin-bottom: 0.25rem;
+}
+
+.dense-comments {
+  margin-top: 1.5rem;
+}
+
+.dense-comments-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.dense-comments-title {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.dense-view-toggle {
+  display: inline-flex;
+  border-radius: 999px;
+  border: 1px solid #d1d5db;
+  overflow: hidden;
+  background: #f9fafb;
+}
+
+.dense-view-toggle button {
+  border: none;
+  padding: 0.25rem 0.75rem;
+  background: transparent;
+  font-size: 0.8rem;
+  cursor: pointer;
+  color: #4b5563;
+}
+
+.dense-view-toggle button.is-active {
+  background: #111827;
+  color: #f9fafb;
+}
+
+.dense-comment-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.dense-comment {
+  margin-bottom: 0.85rem;
+  padding: 0.6rem 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+}
+
+.dense-comment[data-depth="1"] {
+  margin-left: 1.25rem;
+}
+
+.dense-comment[data-depth="2"] {
+  margin-left: 2.25rem;
+}
+
+.dense-comment[data-depth="3"] {
+  margin-left: 3.25rem;
+}
+
+.dense-comment[data-depth="4"],
+.dense-comment[data-depth="5"],
+.dense-comment[data-depth="6"] {
+  margin-left: 3.75rem;
+}
+
+.dense-comment-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.75rem;
+  align-items: baseline;
+  margin-bottom: 0.25rem;
+  font-size: 0.8rem;
+}
+
+.dense-comment-handle {
+  font-weight: 600;
+  color: #111827;
+}
+
+.dense-comment-role {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.05rem 0.4rem;
+  border-radius: 999px;
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
+.dense-comment-tags {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+.dense-tag {
+  font-size: 0.7rem;
+  padding: 0.05rem 0.4rem;
+  border-radius: 999px;
+  background: #f3f4f6;
+  color: #4b5563;
+}
+
+.dense-comment-density {
+  margin-left: auto;
+  font-size: 0.7rem;
+  color: #6b7280;
+}
+
+.dense-comment-body {
+  font-size: 0.9rem;
+  color: #111827;
+}
+
+.dense-comment-body p {
+  margin: 0.25rem 0;
+}
+
+.dense-comment-footer {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.35rem;
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.dense-comment-footer button {
+  border: none;
+  background: none;
+  padding: 0;
+  font-size: 0.75rem;
+  color: #4b5563;
+  cursor: pointer;
+}
+
+.dense-report-menu {
+  display: none;
+  margin-top: 0.35rem;
+  font-size: 0.75rem;
+}
+
+.dense-report-menu.is-open {
+  display: block;
+}
+
+.dense-report-menu button {
+  border: none;
+  background: #f3f4f6;
+  padding: 0.15rem 0.4rem;
+  margin: 0 0.25rem 0.25rem 0;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 0.7rem;
+}
+
+.dense-comment-children {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 0.5rem;
+}
+
+.dense-thread-collapsed > .dense-comment-children {
+  display: none;
+}
+
+.dense-thread-toggle {
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  color: #4b5563;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.dense-comment-form {
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px dashed #e5e7eb;
+}
+
+.dense-civility-hint {
+  font-size: 0.8rem;
+  color: #6b7280;
+  margin-bottom: 0.35rem;
+}
+
+.dense-comment-form label {
+  display: block;
+  font-size: 0.8rem;
+  margin-bottom: 0.15rem;
+}
+
+.dense-comment-form input[type="text"],
+.dense-comment-form textarea,
+.dense-comment-form input[type="email"] {
+  width: 100%;
+  padding: 0.35rem 0.45rem;
+  border-radius: 0.35rem;
+  border: 1px solid #d1d5db;
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+}
+
+.dense-comment-form textarea {
+  min-height: 90px;
+}
+
+.dense-comment-form button[type="submit"] {
+  border-radius: 999px;
+  border: none;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.8rem;
+  background: #111827;
+  color: #f9fafb;
+  cursor: pointer;
+}
+
+.dense-lab-chat {
+  margin-top: 1.75rem;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+}
+
+.dense-lab-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.5rem;
+}
+
+.dense-lab-messages {
+  max-height: 220px;
+  overflow-y: auto;
+  margin-bottom: 0.5rem;
+}
+
+.dense-lab-message {
+  font-size: 0.8rem;
+  padding: 0.25rem 0.35rem;
+  border-radius: 0.35rem;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  margin-bottom: 0.35rem;
+}
+
+.dense-lab-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.7rem;
+  color: #6b7280;
+  margin-bottom: 0.1rem;
+}
+
+.dense-lab-body {
+  font-size: 0.8rem;
+}
+
+.dense-lab-note {
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.dense-lab-chat form {
+  margin-bottom: 0.35rem;
+}
+
+.dense-lab-chat input[type="text"],
+.dense-lab-chat textarea {
+  width: 100%;
+  padding: 0.3rem 0.4rem;
+  border-radius: 0.35rem;
+  border: 1px solid #d1d5db;
+  font-size: 0.8rem;
+  margin-bottom: 0.35rem;
+}
+
+.dense-lab-chat textarea {
+  min-height: 60px;
+}
+
+.dense-lab-chat button[type="submit"] {
+  border: none;
+  border-radius: 999px;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.8rem;
+  background: #111827;
+  color: #f9fafb;
+  cursor: pointer;
+}
+
+.dense-annotations {
+  margin-top: 1.75rem;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+}
+
+.dense-annotations-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.dense-annotations-toggle {
+  font-size: 0.8rem;
+}
+
+.dense-annotations-toggle input {
+  margin-right: 0.25rem;
+}
+
+.dense-annotation-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.25rem 0 0.5rem;
+}
+
+.dense-annotation-item {
+  font-size: 0.8rem;
+  padding: 0.4rem 0.45rem;
+  border-radius: 0.35rem;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  margin-bottom: 0.35rem;
+}
+
+.dense-annotation-quote {
+  font-style: italic;
+  color: #4b5563;
+}
+
+.dense-annotation-note {
+  margin-top: 0.2rem;
+}
+
+.dense-annotation-meta {
+  margin-top: 0.15rem;
+  font-size: 0.7rem;
+  color: #6b7280;
+}
+
+.dense-annotation-form label {
+  display: block;
+  font-size: 0.8rem;
+  margin-bottom: 0.15rem;
+}
+
+.dense-annotation-form input,
+.dense-annotation-form textarea {
+  width: 100%;
+  padding: 0.3rem 0.4rem;
+  border-radius: 0.35rem;
+  border: 1px solid #d1d5db;
+  font-size: 0.8rem;
+  margin-bottom: 0.35rem;
+}
+
+.dense-annotation-form textarea {
+  min-height: 60px;
+}
+
+.dense-annotation-form button {
+  border-radius: 999px;
+  border: none;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.8rem;
+  background: #111827;
+  color: #f9fafb;
+  cursor: pointer;
+}
+
+.dense-accounts {
+  margin-top: 1.75rem;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+}
+
+.dense-accounts h3 {
+  margin-bottom: 0.25rem;
+}
+
+.dense-accounts-note {
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin-bottom: 0.5rem;
+}
+
+.dense-accounts form {
+  margin-bottom: 0.5rem;
+}
+
+.dense-accounts label {
+  display: block;
+  font-size: 0.8rem;
+  margin-bottom: 0.15rem;
+}
+
+.dense-accounts input,
+.dense-accounts textarea {
+  width: 100%;
+  padding: 0.3rem 0.4rem;
+  border-radius: 0.35rem;
+  border: 1px solid #d1d5db;
+  font-size: 0.8rem;
+  margin-bottom: 0.35rem;
+}
+
+.dense-accounts button {
+  border-radius: 999px;
+  border: none;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.8rem;
+  background: #111827;
+  color: #f9fafb;
+  cursor: pointer;
+}
+
+.dense-profile-summary {
+  font-size: 0.8rem;
+  color: #4b5563;
+}
+
+.dense-delta-log {
+  margin-top: 0.75rem;
+  border-top: 1px dashed #e5e7eb;
+  padding-top: 0.5rem;
+}
+
+.dense-delta-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0.25rem 0 0.35rem;
+}
+
+.dense-delta-item {
+  font-size: 0.8rem;
+  margin-bottom: 0.25rem;
+}
+
+.dense-email-feeds {
+  margin-top: 2rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+}
+
+.dense-email-feeds h2 {
+  margin-bottom: 0.5rem;
+}
+
+.dense-email-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.dense-email-option {
+  font-size: 0.85rem;
+}
+
+.dense-email-option label {
+  cursor: pointer;
+}
+
+.dense-email-note {
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.dense-email-feeds input[type="email"] {
+  width: 100%;
+  max-width: 320px;
+  padding: 0.35rem 0.45rem;
+  border-radius: 0.35rem;
+  border: 1px solid #d1d5db;
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+}
+
+.dense-email-feeds button {
+  border-radius: 999px;
+  border: none;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.8rem;
+  background: #111827;
+  color: #f9fafb;
+  cursor: pointer;
+}
+
+.dense-email-status {
+  font-size: 0.8rem;
+  color: #4b5563;
+  margin-top: 0.25rem;
+}
+
+@media (max-width: 640px) {
+  .dense-comment[data-depth="1"],
+  .dense-comment[data-depth="2"],
+  .dense-comment[data-depth="3"],
+  .dense-comment[data-depth="4"],
+  .dense-comment[data-depth="5"],
+  .dense-comment[data-depth="6"] {
+    margin-left: 0.75rem;
+  }
+
+  .dense-post-metrics {
+    flex-direction: column;
+  }
+}
+

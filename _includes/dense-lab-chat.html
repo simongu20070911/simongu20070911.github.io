@@ -1,0 +1,14 @@
+<aside class="dense-lab-chat"
+       data-thread-slug="{{ include.slug }}">
+  <div class="dense-lab-header">
+    <h3>Lab Chat</h3>
+    <span class="dense-lab-note">Ephemeral, auto-expiring after 7 days (local).</span>
+  </div>
+  <div class="dense-lab-messages" data-lab-chat-messages></div>
+  <form data-lab-chat-form>
+    <input type="text" name="lab_handle" placeholder="handle (optional)">
+    <textarea name="lab_message" placeholder="Short, time-sensitive questions or leads."></textarea>
+    <button type="submit">Post to Lab Chat</button>
+  </form>
+</aside>
+

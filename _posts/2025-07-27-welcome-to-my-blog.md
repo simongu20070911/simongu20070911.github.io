@@ -29,3 +29,12 @@ I plan to write about various topics that interest me, including:
 If you have any questions, suggestions, or just want to say hi, feel free to reach out through [GitHub](https://github.com/simongu20070911).
 
 Stay tuned for more posts coming soon!
+
+{% if site.dense_features.enabled %}
+<p class="dense-multi-part-link">
+  <a href="{{ page.url | relative_url }}?show_multi_part">
+    Show multi-part comments, metrics, and lab chat
+  </a>
+</p>
+{% include dense-multi-part.html slug="welcome-to-my-blog" %}
+{% endif %}

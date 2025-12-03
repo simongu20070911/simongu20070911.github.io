@@ -79,3 +79,12 @@ The model assumes 80% utilisation and $0.065/kWh power purchase agreements. Any 
 The “abundant intelligence” idea is still aspirational, but the math shows how quickly trillions of market cap could reprice if the build actually happens. The companies that keep optionality on capital deployment, margins, and regulatory goodwill will control the narrative.
 
 *Source files:* [Scenario scripts and data](https://github.com/simongu20070911/simongu20070911.github.io/tree/master/assets/abundant-intelligence) will be published alongside this post as I continue refining the model.
+
+{% if site.dense_features.enabled %}
+<p class="dense-multi-part-link">
+  <a href="{{ page.url | relative_url }}?show_multi_part">
+    Show multi-part comments, metrics, and lab chat
+  </a>
+</p>
+{% include dense-multi-part.html slug="abundant-intelligence-market-cap-scenario" %}
+{% endif %}

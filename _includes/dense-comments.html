@@ -1,0 +1,33 @@
+{% assign slug = include.slug %}
+{% assign thread = site.data.dense_comments[slug] %}
+{% if thread %}
+<section class="dense-comments" data-thread-slug="{{ slug }}">
+  <header class="dense-comments-header">
+    <div class="dense-comments-title">
+      Frontier comments on: <span>{{ thread.title }}</span>
+    </div>
+    <div class="dense-view-toggle" aria-label="Filter comment view">
+      <button type="button" data-dense-view="dense" class="is-active">Dense view</button>
+      <button type="button" data-dense-view="all">All comments</button>
+    </div>
+  </header>
+  <ol class="dense-comment-list">
+    {% for comment in thread.comments %}
+      {% include dense-comment-item.html comment=comment depth=0 %}
+    {% endfor %}
+  </ol>
+  <form class="dense-comment-form" data-dense-comment-form>
+    <p class="dense-civility-hint">
+      Critique arguments, not people. Be specific. Link sources when you can.
+    </p>
+    <label for="dense-handle-{{ slug }}">Handle</label>
+    <input id="dense-handle-{{ slug }}" type="text" name="handle" placeholder="@handle (optional)">
+
+    <label for="dense-comment-{{ slug }}">Comment</label>
+    <textarea id="dense-comment-{{ slug }}" name="comment" placeholder="Add a dense, reference-backed comment."></textarea>
+
+    <button type="submit">Post (local only)</button>
+  </form>
+</section>
+{% endif %}
+

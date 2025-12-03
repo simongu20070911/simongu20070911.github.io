@@ -1,0 +1,34 @@
+<section class="dense-email-feeds" data-requires-show-multi-part="true">
+  <h2>Dense feed &amp; change-log feed</h2>
+  <p class="dense-email-note">
+    Opt into two different streams:
+    a “dense feed” with full essays and long, high-quality comment threads,
+    and a “change-log feed” with tiny corrections and model updates.
+  </p>
+
+  <div class="dense-email-options">
+    <div class="dense-email-option">
+      <label>
+        <input type="checkbox" name="dense_feed_dense" checked>
+        Dense feed (essays + frontier conversations)
+      </label>
+    </div>
+    <div class="dense-email-option">
+      <label>
+        <input type="checkbox" name="dense_feed_changelog">
+        Change-log feed (small corrections &amp; updates)
+      </label>
+    </div>
+  </div>
+
+  <input type="email" name="dense_feed_email" placeholder="you@example.com">
+  <button type="button" data-dense-feed-submit>Save preferences (local)</button>
+
+  <p class="dense-email-status"></p>
+  <p class="dense-email-note">
+    For now this only stores preferences in your browser. In a live deployment,
+    the “dense feed” would likely be an email / RSS hybrid and the “change-log
+    feed” would mirror a git-style commit log.
+  </p>
+</section>
+
