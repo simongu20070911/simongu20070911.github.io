@@ -273,10 +273,12 @@ Nuclear PPAs (selected)
 [17]: https://hai.stanford.edu/news/decoding-white-house-ai-executive-orders-achievements "Stanford HAI — Decoding the AI Executive Order"
 
 {% if site.dense_features.enabled %}
+{% if site.dense_features.experimental_passed %}
 <p class="dense-multi-part-link">
   <a href="{{ page.url | relative_url }}?show_multi_part">
     Show multi-part comments, metrics, and lab chat
   </a>
 </p>
+{% endif %}
 {% include dense-multi-part.html slug="power-bandwidth-politics-condition" %}
 {% endif %}

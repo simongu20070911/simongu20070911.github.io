@@ -110,10 +110,12 @@ To reach 4–5× (~$18–22.5 T), NVIDIA needs some combination of:
 *Last updated: September 24, 2025.*
 
 {% if site.dense_features.enabled %}
+{% if site.dense_features.experimental_passed %}
 <p class="dense-multi-part-link">
   <a href="{{ page.url | relative_url }}?show_multi_part">
     Show multi-part comments, metrics, and lab chat
   </a>
 </p>
+{% endif %}
 {% include dense-multi-part.html slug="nvda-vs-amd-moat-analysis" %}
 {% endif %}

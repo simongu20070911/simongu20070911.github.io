@@ -42,6 +42,7 @@ exclude:
 # Dense, gated experimental features
 dense_features:
   enabled: true             # master toggle for all multi-part extras
+  experimental_passed: false # controls whether the CTA link is shown
   comments: true            # threaded comments + density view
   replication_notes: true   # per-post "Replication & Notes" box
   views_depth: true         # views counter + depth meter

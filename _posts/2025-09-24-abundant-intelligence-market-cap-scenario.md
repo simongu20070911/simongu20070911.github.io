@@ -81,10 +81,12 @@ The “abundant intelligence” idea is still aspirational, but the math shows h
 *Source files:* [Scenario scripts and data](https://github.com/simongu20070911/simongu20070911.github.io/tree/master/assets/abundant-intelligence) will be published alongside this post as I continue refining the model.
 
 {% if site.dense_features.enabled %}
+{% if site.dense_features.experimental_passed %}
 <p class="dense-multi-part-link">
   <a href="{{ page.url | relative_url }}?show_multi_part">
     Show multi-part comments, metrics, and lab chat
   </a>
 </p>
+{% endif %}
 {% include dense-multi-part.html slug="abundant-intelligence-market-cap-scenario" %}
 {% endif %}

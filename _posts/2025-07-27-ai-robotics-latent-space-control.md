@@ -127,10 +127,12 @@ The software is ready. The question is: who will build the first truly reflexive
 *Are you working on robotic control systems? I'd love to connect and discuss implementation strategies. The future of robotics is reflexive, predictive, and aware—and it starts with latent space.*
 
 {% if site.dense_features.enabled %}
+{% if site.dense_features.experimental_passed %}
 <p class="dense-multi-part-link">
   <a href="{{ page.url | relative_url }}?show_multi_part">
     Show multi-part comments, metrics, and lab chat
   </a>
 </p>
+{% endif %}
 {% include dense-multi-part.html slug="ai-robotics-latent-space-control" %}
 {% endif %}

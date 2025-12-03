@@ -26,10 +26,12 @@ This is conceptually close to how people learn to keep better notes or tell tigh
 The frontier I think lies in designing memory representations, reward signals, and training curricula that make this self editing, self compressing style of model robust at scale.
 
 {% if site.dense_features.enabled %}
+{% if site.dense_features.experimental_passed %}
 <p class="dense-multi-part-link">
   <a href="{{ page.url | relative_url }}?show_multi_part">
     Show multi-part comments, metrics, and lab chat
   </a>
 </p>
+{% endif %}
 {% include dense-multi-part.html slug="the-new-recurrent-model" %}
 {% endif %}
