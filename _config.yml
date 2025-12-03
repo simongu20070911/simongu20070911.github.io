@@ -41,11 +41,11 @@ exclude:
 
 # Dense, gated experimental features
 dense_features:
-  enabled: false            # master toggle for all multi-part extras
-  comments: false           # threaded comments + density view
-  replication_notes: false  # per-post "Replication & Notes" box
-  views_depth: false        # views counter + depth meter
-  lab_chat: false           # ephemeral "Lab Chat" sidebar
-  inline_annotations: false # inline annotations + margin notes
-  accounts: false           # lightweight accounts + delta log
-  email_feeds: false        # "dense feed" email + change-log feed
+  enabled: true             # master toggle for all multi-part extras
+  comments: true            # threaded comments + density view
+  replication_notes: true   # per-post "Replication & Notes" box
+  views_depth: true         # views counter + depth meter
+  lab_chat: true            # ephemeral "Lab Chat" sidebar
+  inline_annotations: true  # inline annotations + margin notes
+  accounts: true            # lightweight accounts + delta log
+  email_feeds: true         # "dense feed" email + change-log feed
