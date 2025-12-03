@@ -755,8 +755,13 @@
         }
       }
 
+      function isApprovedAccount(data) {
+        return !!(data && data.approved);
+      }
+
       function renderShell(data) {
         var hasInvite = !!(data && data.invite && data.invite.email);
+        var approved = isApprovedAccount(data);
 
         if (inviteForm) {
           if (data && data.invite) {
@@ -776,7 +781,7 @@
         }
 
         if (loginForm) {
-          loginForm.hidden = !hasInvite;
+          loginForm.hidden = !approved;
         }
 
         if (inviteStatus) {
@@ -795,8 +800,9 @@
 
       function renderProfile(data) {
         if (!profile || !summary) return;
-        profile.hidden = !data;
-        if (!data) {
+        var approved = isApprovedAccount(data);
+        profile.hidden = !approved;
+        if (!approved || !data) {
           summary.textContent = '';
           if (deltaList) deltaList.innerHTML = '';
           return;
