@@ -1,12 +1,33 @@
 <section class="dense-accounts">
-  <h3>Lightweight account (local)</h3>
+  <h3>Private beta access</h3>
   <p class="dense-accounts-note">
-    Sign in with an email to set a handle and keep a small “delta log.” This is local-only; no email is actually sent.
+    This space is invitation-only while I keep the conversations dense and on-topic.
+    Tell me who you are and what you want to work on here.
+    For now everything stays in your browser; in a live deployment this would submit an application.
   </p>
-  <form data-dense-login-form>
-    <label for="dense-email">Email for magic link</label>
+
+  <form class="dense-invite-form" data-dense-invite-form>
+    <label for="dense-invite-name">Name or handle</label>
+    <input id="dense-invite-name" type="text" name="dense_invite_name" placeholder="e.g. robotics + macro person">
+
+    <label for="dense-invite-email">Email</label>
+    <input id="dense-invite-email" type="email" name="dense_invite_email" placeholder="you@example.com">
+
+    <label for="dense-invite-focus">What are you reading or building?</label>
+    <textarea id="dense-invite-focus" name="dense_invite_focus" placeholder="What kinds of dense conversations or projects do you want to pursue here?"></textarea>
+
+    <label for="dense-invite-links">Links to your work (optional)</label>
+    <textarea id="dense-invite-links" name="dense_invite_links" placeholder="GitHub, papers, posts, or anything that shows how you think."></textarea>
+
+    <button type="submit">Request an invitation</button>
+  </form>
+
+  <p class="dense-invite-status"></p>
+
+  <form data-dense-login-form hidden>
+    <label for="dense-email">Email for access link</label>
     <input id="dense-email" type="email" name="dense_email" placeholder="you@example.com">
-    <button type="submit">Send magic link (simulate)</button>
+    <button type="submit">Save &amp; continue locally</button>
   </form>
 
   <div data-dense-profile hidden>

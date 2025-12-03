@@ -567,6 +567,20 @@
 
     blocks.forEach(function (block) {
       var key = 'dense-account';
+      var inviteForm = block.querySelector('form[data-dense-invite-form]');
+      var inviteNameInput = block.querySelector(
+        'input[name="dense_invite_name"]'
+      );
+      var inviteEmailInput = block.querySelector(
+        'input[name="dense_invite_email"]'
+      );
+      var inviteFocusInput = block.querySelector(
+        'textarea[name="dense_invite_focus"]'
+      );
+      var inviteLinksInput = block.querySelector(
+        'textarea[name="dense_invite_links"]'
+      );
+      var inviteStatus = block.querySelector('.dense-invite-status');
       var loginForm = block.querySelector('form[data-dense-login-form]');
       var emailInput = block.querySelector('input[name="dense_email"]');
       var profile = block.querySelector('[data-dense-profile]');
@@ -604,6 +618,44 @@
           localStorage.setItem(key, JSON.stringify(data));
         } catch (e) {
           // ignore
+        }
+      }
+
+      function renderShell(data) {
+        var hasInvite = !!(data && data.invite && data.invite.email);
+
+        if (inviteForm) {
+          if (data && data.invite) {
+            if (inviteNameInput) {
+              inviteNameInput.value = data.invite.name || '';
+            }
+            if (inviteEmailInput) {
+              inviteEmailInput.value = data.invite.email || '';
+            }
+            if (inviteFocusInput) {
+              inviteFocusInput.value = data.invite.focus || '';
+            }
+            if (inviteLinksInput) {
+              inviteLinksInput.value = (data.invite.links || []).join(', ');
+            }
+          }
+        }
+
+        if (loginForm) {
+          loginForm.hidden = !hasInvite;
+        }
+
+        if (inviteStatus) {
+          if (hasInvite) {
+            inviteStatus.textContent =
+              'Invitation request saved locally. In a live deployment this would be reviewed before granting access.';
+          } else {
+            inviteStatus.textContent = '';
+          }
+        }
+
+        if (emailInput && data && data.email) {
+          emailInput.value = data.email;
         }
       }
 
@@ -657,7 +709,51 @@
 
       var existing = load();
       if (existing) {
+        renderShell(existing);
         renderProfile(existing);
+      } else {
+        renderShell(null);
+      }
+
+      if (inviteForm && inviteEmailInput && inviteFocusInput) {
+        inviteForm.addEventListener('submit', function (e) {
+          e.preventDefault();
+          var name =
+            (inviteNameInput && inviteNameInput.value.trim()) || '';
+          var email = inviteEmailInput.value.trim();
+          var focus = inviteFocusInput.value.trim();
+          var linksRaw =
+            (inviteLinksInput && inviteLinksInput.value.trim()) || '';
+          if (!email || !focus) return;
+
+          var data =
+            existing ||
+            {
+              email: '',
+              handle: '',
+              bio: '',
+              status: '',
+              links: [],
+              deltas: [],
+            };
+          data.invite = {
+            name: name,
+            email: email,
+            focus: focus,
+            links: linksRaw
+              ? linksRaw.split(',').map(function (s) {
+                  return s.trim();
+                })
+              : [],
+            at: Date.now(),
+          };
+          if (!data.email) {
+            data.email = email;
+          }
+          save(data);
+          existing = data;
+          renderShell(existing);
+        });
       }
 
       if (loginForm && emailInput) {
@@ -677,6 +773,7 @@
           data.email = email;
           save(data);
           existing = data;
+          renderShell(existing);
           renderProfile(existing);
         });
       }
