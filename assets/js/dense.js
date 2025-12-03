@@ -72,16 +72,66 @@
     return Math.round(bitsPer100 * 10) / 10;
   }
 
-  function hasDenseAccount() {
+  function safeRead(key, fallback) {
+    if (typeof window === 'undefined' || !window.localStorage) return fallback;
     try {
-      var raw = localStorage.getItem('dense-account');
-      if (!raw) return false;
-      var data = JSON.parse(raw);
-      if (!data) return false;
-      return !!(data.handle || data.email);
+      var raw = window.localStorage.getItem(key);
+      if (!raw) return fallback;
+      return JSON.parse(raw);
     } catch (e) {
-      return false;
+      return fallback;
     }
+  }
+
+  function safeWrite(key, value) {
+    if (typeof window === 'undefined' || !window.localStorage) return;
+    try {
+      window.localStorage.setItem(key, JSON.stringify(value));
+    } catch (e) {
+      // ignore
+    }
+  }
+
+  var DENSE_ACCOUNT = safeRead('dense-account', null);
+  if (DENSE_ACCOUNT) {
+    try {
+      window.DENSE_ACCOUNT_EMAIL = DENSE_ACCOUNT.email || '';
+      window.DENSE_ACTIVE_HANDLE = DENSE_ACCOUNT.handle || '';
+    } catch (e) {
+      // ignore
+    }
+  }
+
+  function hasDenseAccount() {
+    return !!(
+      (typeof window !== 'undefined' &&
+        (window.DENSE_ACTIVE_HANDLE || window.DENSE_ACCOUNT_EMAIL)) ||
+      (DENSE_ACCOUNT && (DENSE_ACCOUNT.handle || DENSE_ACCOUNT.email))
+    );
+  }
+
+  var DENSE_BACKEND_URL =
+    (typeof window !== 'undefined' && window.DENSE_BACKEND_URL) ||
+    'http://106.14.213.46:4000';
+
+  function backendPost(path, payload) {
+    if (typeof fetch === 'undefined' || !DENSE_BACKEND_URL) {
+      return Promise.resolve(false);
+    }
+    var base = DENSE_BACKEND_URL.replace(/\/+$/, '');
+    var url = base + path;
+    return fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload || {}),
+      keepalive: true,
+    })
+      .then(function (res) {
+        return res.ok;
+      })
+      .catch(function () {
+        return false;
+      });
   }
 
   function ensureAuthModal() {
@@ -210,20 +260,17 @@
             .forEach(function (btn) {
               btn.addEventListener('click', function () {
                 var reason = btn.getAttribute('data-report-reason');
-                try {
-                  var key =
-                    'dense-report:' +
-                    (location.pathname || '') +
-                    ':' +
-                    (comment.dataset.handle || '');
-                  var payload = {
-                    at: Date.now(),
-                    reason: reason,
-                  };
-                  localStorage.setItem(key, JSON.stringify(payload));
-                } catch (e) {
-                  // ignore storage failures
-                }
+                var slugAttr =
+                  container.getAttribute('data-thread-slug') ||
+                  document
+                    .querySelector('.dense-multi-part')
+                    ?.getAttribute('data-thread-slug') ||
+                  location.pathname;
+                backendPost('/api/dense/report', {
+                  slug: slugAttr,
+                  handle: comment.dataset.handle || '',
+                  reason: reason,
+                });
                 reportMenu.classList.remove('is-open');
                 showReportToast(reason);
               });
@@ -404,6 +451,19 @@
             applyView('all');
           }
           initViewsAndDepth();
+
+          var slugAttr =
+            container.getAttribute('data-thread-slug') ||
+            document
+              .querySelector('.dense-multi-part')
+              ?.getAttribute('data-thread-slug') ||
+            location.pathname;
+          backendPost('/api/dense/comment', {
+            slug: slugAttr,
+            handle: handle,
+            body: text,
+            tags: [],
+          });
         });
       }
     });
@@ -413,26 +473,11 @@
     var blocks = document.querySelectorAll('[data-dense-metrics]');
     if (!blocks.length) return;
 
-    var path = location.pathname || '';
-    var viewsKey = 'dense-views:' + path;
-
-    blocks.forEach(function (block) {
+     blocks.forEach(function (block) {
       var viewsEl = block.querySelector('[data-dense-views-count]');
       if (viewsEl) {
-        var count = 0;
-        try {
-          var raw = localStorage.getItem(viewsKey);
-          if (raw) {
-            count = parseInt(raw, 10) || 0;
-            count += 1;
-          } else {
-            // Seed local views so dense posts feel “lived in”
-            count = 300;
-          }
-          localStorage.setItem(viewsKey, String(count));
-        } catch (e) {
-          count = 300;
-        }
+        // Toy heuristic so dense posts feel “lived in” without storing anything locally.
+        var count = 300 + Math.floor(Math.random() * 60);
         viewsEl.textContent = count.toLocaleString();
       }
 
@@ -502,39 +547,15 @@
 
     chats.forEach(function (chat) {
       var slug = chat.getAttribute('data-thread-slug') || location.pathname;
-      var key = 'dense-lab-chat:' + slug;
-
       var messagesEl = chat.querySelector('[data-lab-chat-messages]');
       var form = chat.querySelector('form[data-lab-chat-form]');
       var handleInput = chat.querySelector('input[name="lab_handle"]');
       var textInput = chat.querySelector('textarea[name="lab_message"]');
 
-      function loadMessages() {
-        try {
-          var raw = localStorage.getItem(key);
-          if (!raw) return [];
-          var parsed = JSON.parse(raw);
-          if (!Array.isArray(parsed)) return [];
-          var weekAgo = Date.now() - 7 * 24 * 60 * 60 * 1000;
-          return parsed.filter(function (m) {
-            return m.at && m.at >= weekAgo && m.text;
-          });
-        } catch (e) {
-          return [];
-        }
-      }
-
-      function saveMessages(list) {
-        try {
-          localStorage.setItem(key, JSON.stringify(list));
-        } catch (e) {
-          // ignore
-        }
-      }
+      var msgs = [];
 
       function render() {
         if (!messagesEl) return;
-        var msgs = loadMessages();
         messagesEl.innerHTML = '';
         msgs
           .sort(function (a, b) {
@@ -566,13 +587,11 @@
           var handle = (handleInput && handleInput.value.trim()) || 'anon';
           var text = textInput.value.trim();
           if (!text) return;
-          var msgs = loadMessages();
           msgs.push({
             handle: handle,
             text: text,
             at: Date.now(),
           });
-          saveMessages(msgs);
           textInput.value = '';
           render();
         });
@@ -601,24 +620,7 @@
       );
       var form = block.querySelector('form.dense-annotation-form');
 
-      function loadAnnotations() {
-        try {
-          var raw = localStorage.getItem(key);
-          if (!raw) return [];
-          var parsed = JSON.parse(raw);
-          return Array.isArray(parsed) ? parsed : [];
-        } catch (e) {
-          return [];
-        }
-      }
-
-      function saveAnnotations(items) {
-        try {
-          localStorage.setItem(key, JSON.stringify(items));
-        } catch (e) {
-          // ignore
-        }
-      }
+      var storedAnnotations = [];
 
       function render(show) {
         if (!listEl) return;
@@ -636,7 +638,7 @@
         if (!Array.isArray(pinned)) {
           pinned = [];
         }
-        var items = pinned.concat(loadAnnotations());
+        var items = pinned.concat(storedAnnotations);
         items.forEach(function (item) {
           var li = document.createElement('li');
           li.className = 'dense-annotation-item';
@@ -671,14 +673,12 @@
           var quote = quoteInput.value.trim();
           var note = noteInput.value.trim();
           if (!quote || !note) return;
-          var items = loadAnnotations();
-          items.push({
+          storedAnnotations.push({
             quote: quote,
             note: note,
             handle: 'reader',
             pinned: false,
           });
-          saveAnnotations(items);
           quoteInput.value = '';
           noteInput.value = '';
           if (toggleInput && toggleInput.checked) {
@@ -694,7 +694,6 @@
     if (!blocks.length) return;
 
     blocks.forEach(function (block) {
-      var key = 'dense-account';
       var inviteForm = block.querySelector('form[data-dense-invite-form]');
       var inviteNameInput = block.querySelector(
         'input[name="dense_invite_name"]'
@@ -732,20 +731,27 @@
       );
 
       function load() {
-        try {
-          var raw = localStorage.getItem(key);
-          if (!raw) return null;
-          return JSON.parse(raw);
-        } catch (e) {
-          return null;
-        }
+        return DENSE_ACCOUNT || null;
       }
 
       function save(data) {
+        DENSE_ACCOUNT = data || null;
+        safeWrite('dense-account', data || {});
         try {
-          localStorage.setItem(key, JSON.stringify(data));
+          window.DENSE_ACCOUNT_EMAIL = data && data.email ? data.email : '';
+          window.DENSE_ACTIVE_HANDLE = data && data.handle ? data.handle : '';
         } catch (e) {
           // ignore
+        }
+        if (data && (data.email || (data.invite && data.invite.email))) {
+          backendPost('/api/dense/account', {
+            email: data.email || (data.invite && data.invite.email) || '',
+            handle: data.handle || '',
+            bio: data.bio || '',
+            status: data.status || '',
+            links: Array.isArray(data.links) ? data.links : [],
+            invite: data.invite || null,
+          });
         }
       }
 
@@ -964,7 +970,7 @@
           existing = data;
           deltaTopicInput.value = '';
           deltaNoteInput.value = '';
-          renderProfile(existing);
+         renderProfile(existing);
         });
       }
     });
@@ -1001,21 +1007,9 @@
             ? changelogCheckbox.checked
             : false,
         };
-        try {
-          localStorage.setItem(
-            'dense-email-feed',
-            JSON.stringify({
-              email: email,
-              prefs: prefs,
-              at: Date.now(),
-            })
-          );
-        } catch (e) {
-          // ignore
-        }
         if (status) {
           status.textContent =
-            'Preferences saved locally. In a live deployment this would send a magic-link-style confirmation.';
+            'Preferences noted for this session.';
         }
       });
     });
