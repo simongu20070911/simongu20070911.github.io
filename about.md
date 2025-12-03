@@ -43,7 +43,7 @@ This vision requires a community. If you share the conviction that humanity's gr
 ## Get in Touch
 
 - GitHub: [github.com/simongu20070911](https://github.com/simongu20070911)
-- ULTRATHINK Repository: *Coming soon*
+- ULTRATHINK Repository: *building via ultrahink-DOMI in my GitHub*
 - Discord Community: *Launching soon*
 
 Together, we can ensure that the age of AGI becomes the age of human flourishing.
