@@ -787,7 +787,7 @@
         if (inviteStatus) {
           if (hasInvite) {
             inviteStatus.textContent =
-              'Request sent! You should expect receiving an email from Simon in 7 days.';
+              'Request sent! You should expect receiving an invitation link from Simon in 7 days.';
           } else {
             inviteStatus.textContent = '';
           }
@@ -895,11 +895,11 @@
           renderShell(existing);
           if (inviteStatus) {
             inviteStatus.textContent =
-              'Request sent! You should expect receiving an email from Simon in 7 days.';
+              'Request sent! You should expect receiving an invitation link from Simon in 7 days.';
           }
           try {
             alert(
-              'Request sent! You should expect receiving an email from Simon in 7 days.'
+              'Request sent! You should expect receiving an invitation link from Simon in 7 days.'
             );
           } catch (e) {
             // ignore
