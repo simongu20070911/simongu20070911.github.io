@@ -3,6 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const { Octokit } = require("@octokit/rest");
 const YAML = require("yaml");
+const nodemailer = require("nodemailer");
 
 const app = express();
 app.use(express.json());
@@ -26,6 +27,30 @@ const octokit = new Octokit({ auth: token });
 const owner = "simongu20070911";
 const repo = "simongu20070911.github.io";
 
+const notifyTo = process.env.INVITE_NOTIFY_TO || process.env.NOTIFY_EMAIL;
+let mailTransport = null;
+
+if (
+  notifyTo &&
+  process.env.SMTP_HOST &&
+  process.env.SMTP_USER &&
+  process.env.SMTP_PASS
+) {
+  mailTransport = nodemailer.createTransport({
+    host: process.env.SMTP_HOST,
+    port: Number(process.env.SMTP_PORT || 587),
+    secure: process.env.SMTP_SECURE === "true",
+    auth: {
+      user: process.env.SMTP_USER,
+      pass: process.env.SMTP_PASS,
+    },
+  });
+} else {
+  console.warn(
+    "[dense-backend] SMTP is not fully configured; invite emails will be disabled."
+  );
+}
+
 async function getFile(path) {
   const { data } = await octokit.repos.getContent({ owner, repo, path });
   return {
@@ -43,6 +68,53 @@ async function putFile(path, sha, text, message) {
     sha,
     content: Buffer.from(text, "utf8").toString("base64"),
   });
+}
+
+function sendInviteEmail(entry) {
+  if (!mailTransport || !notifyTo) return;
+  try {
+    const invite = entry.invite || {};
+    const subject =
+      "[dense-blog] New private beta request from " +
+      (invite.name || entry.handle || entry.email || "unknown");
+
+    const lines = [];
+    lines.push("New private beta access request");
+    lines.push("");
+    lines.push("Email: " + (entry.email || ""));
+    if (invite.name) {
+      lines.push("Name: " + invite.name);
+    }
+    if (entry.handle) {
+      lines.push("Handle: " + entry.handle);
+    }
+    if (invite.focus) {
+      lines.push("");
+      lines.push("What they are reading / building:");
+      lines.push(invite.focus);
+    }
+    if (Array.isArray(invite.links) && invite.links.length) {
+      lines.push("");
+      lines.push("Links to their work:");
+      lines.push(invite.links.join(", "));
+    }
+
+    mailTransport.sendMail(
+      {
+        from: process.env.INVITE_FROM || process.env.SMTP_USER,
+        to: notifyTo,
+        subject,
+        text: lines.join("\n"),
+      },
+      (err) => {
+        if (err) {
+          console.error("[dense-backend] failed to send invite email", err);
+        }
+      }
+    );
+  } catch (err) {
+    console.error("[dense-backend] sendInviteEmail error", err);
+  }
 }
 
 app.get("/api/health", (req, res) => {
@@ -107,7 +179,7 @@ app.post("/api/dense/account", async (req, res) => {
       doc.requests = [];
     }
 
-    doc.requests.push({
+    const entry = {
       at: new Date().toISOString(),
       email: email || (invite && invite.email) || "",
       handle: handle || "",
@@ -115,7 +187,9 @@ app.post("/api/dense/account", async (req, res) => {
       status: status || "",
       links: links || [],
       invite: invite || null,
-    });
+    };
+
+    doc.requests.push(entry);
 
     const updated = YAML.stringify(doc);
     await putFile(
@@ -124,6 +198,10 @@ app.post("/api/dense/account", async (req, res) => {
       updated,
       "Append dense account / invite request"
     );
+
+    if (entry.invite && entry.invite.email) {
+      sendInviteEmail(entry);
+    }
 
     res.json({ ok: true });
   } catch (err) {
@@ -175,4 +253,3 @@ const port = process.env.PORT || 4000;
 app.listen(port, () => {
   console.log("[dense-backend] listening on :" + port);
 });
-
