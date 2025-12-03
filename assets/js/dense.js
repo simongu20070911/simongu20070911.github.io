@@ -738,7 +738,7 @@
         if (inviteStatus) {
           if (hasInvite) {
             inviteStatus.textContent =
-              'Invitation request saved locally. In a live deployment this would be reviewed before granting access.';
+              'Request sent! You should expect receiving an email from Simon in 7 days.';
           } else {
             inviteStatus.textContent = '';
           }
@@ -843,6 +843,17 @@
           save(data);
           existing = data;
           renderShell(existing);
+          if (inviteStatus) {
+            inviteStatus.textContent =
+              'Request sent! You should expect receiving an email from Simon in 7 days.';
+          }
+          try {
+            alert(
+              'Request sent! You should expect receiving an email from Simon in 7 days.'
+            );
+          } catch (e) {
+            // ignore
+          }
         });
       }
 
