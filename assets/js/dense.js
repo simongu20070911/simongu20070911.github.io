@@ -135,6 +135,43 @@
     modal.classList.add('is-open');
   }
 
+  function ensureReportToast() {
+    var existing = document.querySelector('[data-dense-report-toast]');
+    if (existing) return existing;
+
+    var toast = document.createElement('div');
+    toast.className = 'dense-report-toast';
+    toast.setAttribute('data-dense-report-toast', 'true');
+    document.body.appendChild(toast);
+    return toast;
+  }
+
+  function showReportToast(reason) {
+    var toast = ensureReportToast();
+    if (!toast) return;
+    var label = '';
+    if (reason === 'handwavey') {
+      label = 'Marked as “handwavey”.';
+    } else if (reason === 'confident-no-sources') {
+      label = 'Marked as “confident but source-free”.';
+    } else if (reason === 'ad-hominem') {
+      label = 'Marked as “ad hominem”.';
+    } else {
+      label = 'Report submitted.';
+    }
+    toast.textContent =
+      label + ' This will be reviewed alongside other reports.';
+    toast.classList.add('is-visible');
+    try {
+      clearTimeout(toast._denseTimeout);
+    } catch (e) {
+      // ignore
+    }
+    toast._denseTimeout = setTimeout(function () {
+      toast.classList.remove('is-visible');
+    }, 2200);
+  }
+
   function initComments() {
     var containers = document.querySelectorAll('.dense-comments');
     if (!containers.length) return;
@@ -188,6 +225,7 @@
                   // ignore storage failures
                 }
                 reportMenu.classList.remove('is-open');
+                showReportToast(reason);
               });
             });
         }

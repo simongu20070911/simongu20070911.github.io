@@ -700,6 +700,33 @@ html[data-show-multi-part="true"] [data-requires-show-multi-part="true"] {
   background: #e5e7eb;
   color: #374151;
 }
+
+.dense-report-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 1.5rem;
+  transform: translateX(-50%);
+  max-width: 480px;
+  width: auto;
+  padding: 0.55rem 0.9rem;
+  border-radius: 999px;
+  background: rgba(17, 24, 39, 0.96);
+  color: #f9fafb;
+  font-size: 0.8rem;
+  line-height: 1.3;
+  text-align: center;
+  box-shadow: 0 16px 30px rgba(15, 23, 42, 0.45);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+  z-index: 2100;
+}
+
+.dense-report-toast.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(-4px);
+}
 @media (max-width: 640px) {
   .dense-comment[data-depth="1"],
   .dense-comment[data-depth="2"],
