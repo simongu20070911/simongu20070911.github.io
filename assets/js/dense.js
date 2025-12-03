@@ -72,6 +72,69 @@
     return Math.round(bitsPer100 * 10) / 10;
   }
 
+  function hasDenseAccount() {
+    try {
+      var raw = localStorage.getItem('dense-account');
+      if (!raw) return false;
+      var data = JSON.parse(raw);
+      if (!data) return false;
+      return !!(data.handle || data.email);
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function ensureAuthModal() {
+    var existing = document.querySelector('[data-dense-auth-modal]');
+    if (existing) return existing;
+
+    var wrapper = document.createElement('div');
+    wrapper.className = 'dense-auth-modal';
+    wrapper.setAttribute('data-dense-auth-modal', 'true');
+    wrapper.innerHTML =
+      '<div class="dense-auth-backdrop" data-dense-auth-close></div>' +
+      '<div class="dense-auth-dialog">' +
+      '  <h3>Join the private beta</h3>' +
+      '  <p>To reply or post here, request access first. This keeps the conversation focused and high-signal.</p>' +
+      '  <div class="dense-auth-actions">' +
+      '    <button type="button" data-dense-auth-open-access>Request an invitation</button>' +
+      '    <button type="button" data-dense-auth-close>Not now</button>' +
+      '  </div>' +
+      '</div>';
+    document.body.appendChild(wrapper);
+
+    wrapper
+      .querySelectorAll('[data-dense-auth-close]')
+      .forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          wrapper.classList.remove('is-open');
+        });
+      });
+
+    var openAccess = wrapper.querySelector(
+      '[data-dense-auth-open-access]'
+    );
+    if (openAccess) {
+      openAccess.addEventListener('click', function () {
+        var target =
+          document.getElementById('dense-accounts') ||
+          document.querySelector('.dense-accounts');
+        if (target && typeof target.scrollIntoView === 'function') {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        wrapper.classList.remove('is-open');
+      });
+    }
+
+    return wrapper;
+  }
+
+  function showAuthModal() {
+    var modal = ensureAuthModal();
+    if (!modal) return;
+    modal.classList.add('is-open');
+  }
+
   function initComments() {
     var containers = document.querySelectorAll('.dense-comments');
     if (!containers.length) return;
@@ -195,6 +258,17 @@
       comments.forEach(function (comment) {
         var depth = parseInt(comment.dataset.depth || '0', 10);
         var children = comment.querySelector('.dense-comment-children');
+        var replyBtn = comment.querySelector('.dense-comment-reply-button');
+
+        if (replyBtn) {
+          replyBtn.addEventListener('click', function (e) {
+            if (!hasDenseAccount()) {
+              e.preventDefault();
+              showAuthModal();
+            }
+          });
+        }
+
         if (children && depth >= 3) {
           var replies = children.querySelectorAll('.dense-comment').length;
           comment.classList.add('dense-thread-collapsed');
@@ -226,6 +300,10 @@
       if (form && listEl) {
         form.addEventListener('submit', function (e) {
           e.preventDefault();
+          if (!hasDenseAccount()) {
+            showAuthModal();
+            return;
+          }
           var handleField = form.querySelector('input[name="handle"]');
           var bodyField = form.querySelector('textarea[name="comment"]');
           var handle =

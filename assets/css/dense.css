@@ -644,6 +644,71 @@ html[data-show-multi-part="true"] [data-requires-show-multi-part="true"] {
   margin-top: 0.25rem;
 }
 
+.dense-auth-modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.dense-auth-modal.is-open {
+  display: flex;
+}
+
+.dense-auth-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.55);
+}
+
+.dense-auth-dialog {
+  position: relative;
+  max-width: 420px;
+  width: 90%;
+  padding: 1.25rem 1.5rem 1rem;
+  border-radius: 0.75rem;
+  background: #ffffff;
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.35);
+  z-index: 1;
+}
+
+.dense-auth-dialog h3 {
+  margin: 0 0 0.4rem;
+  font-size: 1rem;
+}
+
+.dense-auth-dialog p {
+  margin: 0 0 0.75rem;
+  font-size: 0.9rem;
+  color: #4b5563;
+}
+
+.dense-auth-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.dense-auth-actions button {
+  border-radius: 999px;
+  border: none;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.dense-auth-actions [data-dense-auth-open-access] {
+  background: #111827;
+  color: #f9fafb;
+}
+
+.dense-auth-actions [data-dense-auth-close] {
+  background: #e5e7eb;
+  color: #374151;
+}
+
 @media (max-width: 640px) {
   .dense-comment[data-depth="1"],
   .dense-comment[data-depth="2"],
