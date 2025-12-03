@@ -25,14 +25,6 @@ html[data-show-multi-part="true"] [data-requires-show-multi-part="true"] {
   margin-top: 0;
 }
 
-.dense-main-column {
-  min-width: 0;
-}
-
-.dense-annotations-column {
-  margin-top: 1.75rem;
-}
-
 .dense-post-metrics {
   display: flex;
   flex-wrap: wrap;
@@ -708,7 +700,6 @@ html[data-show-multi-part="true"] [data-requires-show-multi-part="true"] {
   background: #e5e7eb;
   color: #374151;
 }
-
 @media (max-width: 640px) {
   .dense-comment[data-depth="1"],
   .dense-comment[data-depth="2"],
@@ -721,19 +712,5 @@ html[data-show-multi-part="true"] [data-requires-show-multi-part="true"] {
 
   .dense-post-metrics {
     flex-direction: column;
-  }
-}
-
-@media (min-width: 960px) {
-  .dense-multi-part {
-    display: grid;
-    grid-template-columns: minmax(0, 2.2fr) minmax(260px, 1fr);
-    gap: 2rem;
-  }
-
-  .dense-annotations-column {
-    align-self: flex-start;
-    position: sticky;
-    top: 6rem;
   }
 }
