@@ -130,6 +130,15 @@
         }
       });
 
+      var densityThreshold = 0;
+      if (densities.length) {
+        var sorted = densities.slice().sort(function (a, b) {
+          return a - b;
+        });
+        var mid = Math.floor(sorted.length * 0.5); // median
+        densityThreshold = sorted[mid] || 0;
+      }
+
       var denseToggle = container.querySelector(
         '.dense-view-toggle button[data-dense-view="dense"]'
       );
@@ -137,26 +146,29 @@
         '.dense-view-toggle button[data-dense-view="all"]'
       );
 
+      function isDenseComment(comment) {
+        var densityScore = parseFloat(comment.dataset.densityScore || '0');
+        var words = parseInt(comment.dataset.wordCount || '0', 10);
+        var text = comment.textContent || '';
+        var hasLink = /https?:\/\/\S+|\[\d+\]/i.test(text);
+        var hasEquation =
+          /[=<>]\s*\d|\bO\([\w^]+\)|\bETA\b|\bsum\b|∑|∫|≈|≥|≤/.test(text);
+
+        var passesAbsolute =
+          words >= 80 ||
+          (hasLink && words >= 40) ||
+          hasEquation ||
+          densityScore >= 1.5;
+
+        var passesRelative =
+          densityThreshold > 0 && densityScore >= densityThreshold;
+
+        return passesAbsolute || passesRelative;
+      }
+
       function applyView(mode) {
         comments.forEach(function (comment) {
-          var densityScore = parseFloat(
-            comment.dataset.densityScore || '0'
-          );
-          var words = parseInt(comment.dataset.wordCount || '0', 10);
-          var hasLink =
-            /https?:\/\/\S+|\[\d+\]/i.test(
-              comment.textContent || ''
-            );
-          var hasEquation =
-            /[=<>]\s*\d|\bO\([\w^]+\)|\bETA\b|\bsum\b|∑|∫|≈|≥|≤/.test(
-              comment.textContent || ''
-            );
-
-          var isDense =
-            densityScore >= 1.2 ||
-            words >= 80 ||
-            (hasLink && words >= 40) ||
-            hasEquation;
+          var isDense = isDenseComment(comment);
 
           if (mode === 'dense' && !isDense) {
             comment.style.display = 'none';
