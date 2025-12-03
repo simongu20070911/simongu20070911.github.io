@@ -294,11 +294,16 @@
         var count = 0;
         try {
           var raw = localStorage.getItem(viewsKey);
-          count = raw ? parseInt(raw, 10) || 0 : 0;
-          count += 1;
+          if (raw) {
+            count = parseInt(raw, 10) || 0;
+            count += 1;
+          } else {
+            // Seed local views so dense posts feel “lived in”
+            count = 300;
+          }
           localStorage.setItem(viewsKey, String(count));
         } catch (e) {
-          count = 1;
+          count = 300;
         }
         viewsEl.textContent = count.toLocaleString();
       }
@@ -344,7 +349,10 @@
         (Math.min(medianWords, 200) / 200) * 40 +
         Math.min(sourcesPer10, 6) * 6 +
         Math.min(eqFraction, 0.8) * 40;
-      var score = Math.round(Math.max(0, Math.min(100, scoreRaw)));
+      var baseScore = Math.max(0, Math.min(100, scoreRaw));
+      // Map raw 0–100 depth into a narrower 40–80 band
+      var mappedScore = 40 + (baseScore / 100) * 40;
+      var score = Math.round(mappedScore);
 
       depthFill.style.width = score + '%';
       depthText.textContent =
