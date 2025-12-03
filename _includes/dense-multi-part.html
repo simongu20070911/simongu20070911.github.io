@@ -10,79 +10,82 @@
 {% assign meta = site.data.dense_meta[slug] %}
 
 <section class="dense-multi-part" data-thread-slug="{{ slug }}" data-requires-show-multi-part="true">
-
-  {% if site.dense_features.views_depth %}
-    <section class="dense-post-metrics" data-dense-metrics>
-      <div class="dense-metric-block">
-        <span class="dense-metric-label">Views (per browser)</span>
-        <span class="dense-metric-value" data-dense-views-count>—</span>
-      </div>
-      <div class="dense-metric-block">
-        <span class="dense-metric-label">Depth score</span>
-        <div class="dense-depth-bar">
-          <div class="dense-depth-bar-fill" data-dense-depth-fill></div>
+  <div class="dense-main-column">
+    {% if site.dense_features.views_depth %}
+      <section class="dense-post-metrics" data-dense-metrics>
+        <div class="dense-metric-block">
+          <span class="dense-metric-label">Views (per browser)</span>
+          <span class="dense-metric-value" data-dense-views-count>—</span>
         </div>
-        <span class="dense-depth-text" data-dense-depth-text>
-          Depth — computed from comment length, sources, and equations.
-        </span>
-      </div>
-    </section>
-  {% endif %}
+        <div class="dense-metric-block">
+          <span class="dense-metric-label">Depth score</span>
+          <div class="dense-depth-bar">
+            <div class="dense-depth-bar-fill" data-dense-depth-fill></div>
+          </div>
+          <span class="dense-depth-text" data-dense-depth-text>
+            Depth — computed from comment length, sources, and equations.
+          </span>
+        </div>
+      </section>
+    {% endif %}
 
-  {% if site.dense_features.replication_notes and meta and meta.replication %}
-    <section class="dense-replication-box">
-      <h2>Replication &amp; Notes</h2>
-      {% if meta.replication.summary %}
-        <p>{{ meta.replication.summary }}</p>
-      {% endif %}
-      {% if meta.replication.links and meta.replication.links.size > 0 %}
-        <ul class="dense-replication-links">
-          {% for item in meta.replication.links %}
-            <li>
-              {% if item.url %}
-                <a href="{{ item.url }}">{{ item.label }}</a>
-              {% else %}
-                <span>{{ item.label }}</span>
-              {% endif %}
-              {% if item.note %}
-                <span class="dense-replication-note">{{ item.note }}</span>
-              {% endif %}
-            </li>
-          {% endfor %}
-        </ul>
-      {% endif %}
-      {% if meta.extensions and meta.extensions.size > 0 %}
-        <details class="dense-extensions">
-          <summary>Click to see how other readers extended this model</summary>
-          <ul>
-            {% for ext in meta.extensions %}
+    {% if site.dense_features.replication_notes and meta and meta.replication %}
+      <section class="dense-replication-box">
+        <h2>Replication &amp; Notes</h2>
+        {% if meta.replication.summary %}
+          <p>{{ meta.replication.summary }}</p>
+        {% endif %}
+        {% if meta.replication.links and meta.replication.links.size > 0 %}
+          <ul class="dense-replication-links">
+            {% for item in meta.replication.links %}
               <li>
-                <strong>{{ ext.title }}</strong> by <span>{{ ext.author }}</span>
-                {% if ext.url %}
-                  — <a href="{{ ext.url }}">view</a>
+                {% if item.url %}
+                  <a href="{{ item.url }}">{{ item.label }}</a>
+                {% else %}
+                  <span>{{ item.label }}</span>
+                {% endif %}
+                {% if item.note %}
+                  <span class="dense-replication-note">{{ item.note }}</span>
                 {% endif %}
               </li>
             {% endfor %}
           </ul>
-        </details>
-      {% endif %}
-    </section>
-  {% endif %}
+        {% endif %}
+        {% if meta.extensions and meta.extensions.size > 0 %}
+          <details class="dense-extensions">
+            <summary>Click to see how other readers extended this model</summary>
+            <ul>
+              {% for ext in meta.extensions %}
+                <li>
+                  <strong>{{ ext.title }}</strong> by <span>{{ ext.author }}</span>
+                  {% if ext.url %}
+                    — <a href="{{ ext.url }}">view</a>
+                  {% endif %}
+                </li>
+              {% endfor %}
+            </ul>
+          </details>
+        {% endif %}
+      </section>
+    {% endif %}
 
-  {% if site.dense_features.accounts %}
-    {% include dense-accounts.html slug=slug %}
-  {% endif %}
+    {% if site.dense_features.accounts %}
+      {% include dense-accounts.html slug=slug %}
+    {% endif %}
 
-  {% if site.dense_features.comments %}
-    {% include dense-comments.html slug=slug %}
-  {% endif %}
+    {% if site.dense_features.comments %}
+      {% include dense-comments.html slug=slug %}
+    {% endif %}
 
-  {% if site.dense_features.lab_chat %}
-    {% include dense-lab-chat.html slug=slug %}
-  {% endif %}
+    {% if site.dense_features.lab_chat %}
+      {% include dense-lab-chat.html slug=slug %}
+    {% endif %}
+  </div>
 
   {% if site.dense_features.inline_annotations %}
-    {% include dense-annotations.html slug=slug %}
+    <aside class="dense-annotations-column">
+      {% include dense-annotations.html slug=slug %}
+    </aside>
   {% endif %}
 
 </section>
