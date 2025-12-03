@@ -69,6 +69,10 @@
     </section>
   {% endif %}
 
+  {% if site.dense_features.accounts %}
+    {% include dense-accounts.html slug=slug %}
+  {% endif %}
+
   {% if site.dense_features.comments %}
     {% include dense-comments.html slug=slug %}
   {% endif %}
@@ -81,9 +85,4 @@
     {% include dense-annotations.html slug=slug %}
   {% endif %}
 
-  {% if site.dense_features.accounts %}
-    {% include dense-accounts.html slug=slug %}
-  {% endif %}
-
 </section>
-
